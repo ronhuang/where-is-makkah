@@ -28,11 +28,27 @@ namespace WhereIsMakkah.ViewModel
             }
         }
 
-        public string Inst1
+        public string Instruction
         {
             get
             {
                 return "Manually point the small arrow to north.";
+            }
+        }
+
+        public string Feedback
+        {
+            get
+            {
+                return "The big arrow should point to Makkah.";
+            }
+        }
+
+        public string DistanceLabel
+        {
+            get
+            {
+                return string.Format("Distance to Makkah is {0} {1}.", _distance, _unit);
             }
         }
 

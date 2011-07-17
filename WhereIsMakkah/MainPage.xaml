@@ -38,6 +38,7 @@
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*" />
 			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
 		<!--TitlePanel contains the name of the application and page title-->
@@ -52,7 +53,7 @@
 			<!--ContentPanel - place additional content here-->
 			<es:BlockArrow Height="30" Orientation="Up" Stroke="{StaticResource PhoneAccentBrush}" UseLayoutRounding="False" Width="30" StrokeThickness="{StaticResource PhoneStrokeThickness}"/>
 			<!--ContentPanel - place additional content here-->
-			<TextBlock TextWrapping="Wrap" Text="{Binding Inst1, Mode=OneWay}" Margin="{StaticResource PhoneMargin}" TextAlignment="Center"/>
+			<TextBlock Text="{Binding Instruction, Mode=OneWay}" Margin="{StaticResource PhoneMargin}" TextAlignment="Center"/>
 		</StackPanel>
 
 		<!--ContentPanel - place additional content here-->
@@ -61,12 +62,8 @@
 				<PlaneProjection RotationX="0" RotationY="0" RotationZ="0"/>
 			</es:BlockArrow.Projection>
 		</es:BlockArrow>
-		<StackPanel x:Name="ContentGrid"
-			Grid.Row="3" Orientation="Horizontal" Margin="{StaticResource PhoneMargin}">
-			<TextBlock x:Name="DistanceLabel" TextWrapping="Wrap" Text="Distance:"/>
-			<TextBlock x:Name="DistanceValueTextBlock" TextWrapping="Wrap" Text="{Binding Distance}" Margin="2,0,0,0"/>
-			<TextBlock x:Name="DistanceUnitTextBlock" TextWrapping="Wrap" Text="{Binding Unit}" Margin="2,0,0,0"/>
-		</StackPanel>
+		<TextBlock Text="{Binding Feedback, Mode=OneWay}" Margin="{StaticResource PhoneMargin}" d:LayoutOverrides="Width" Grid.Row="3" HorizontalAlignment="Center"/>
+		<TextBlock Text="{Binding DistanceLabel, Mode=OneWay}" Margin="{StaticResource PhoneMargin}" d:LayoutOverrides="Width" Grid.Row="4" HorizontalAlignment="Center"/>
 	</Grid>
 
 
