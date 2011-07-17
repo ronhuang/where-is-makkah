@@ -1,0 +1,73 @@
+﻿<phone:PhoneApplicationPage
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+                            xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            xmlns:es="clr-namespace:Microsoft.Expression.Shapes;assembly=Microsoft.Expression.Drawing" xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" xmlns:GalaSoft_MvvmLight_Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71" x:Class="WhereIsMakkah.MainPage"
+                            FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                            FontSize="{StaticResource PhoneFontSizeNormal}"
+                            Foreground="{StaticResource PhoneForegroundBrush}"
+                            SupportedOrientations="Portrait"
+                            Orientation="Portrait"
+                            mc:Ignorable="d"
+                            d:DesignWidth="480"
+                            d:DesignHeight="768"
+                            shell:SystemTray.IsVisible="True"
+                            DataContext="{Binding Main, Source={StaticResource Locator}}">
+	<i:Interaction.Triggers>
+		<i:EventTrigger>
+			<GalaSoft_MvvmLight_Command:EventToCommand Command="{Binding SensorStartCommand, Mode=OneWay}"/>
+		</i:EventTrigger>
+		<i:EventTrigger EventName="Unloaded">
+			<GalaSoft_MvvmLight_Command:EventToCommand Command="{Binding SensorStopCommand, Mode=OneWay}"/>
+		</i:EventTrigger>
+	</i:Interaction.Triggers>
+	<phone:PhoneApplicationPage.ApplicationBar>
+		<shell:ApplicationBar IsMenuEnabled="False">
+			<shell:ApplicationBarIconButton IconUri="/icons/appbar.refresh.rest.png" IsEnabled="True" Text="Refresh"/>
+			<shell:ApplicationBarIconButton IconUri="/icons/appbar.feature.settings.rest.png" IsEnabled="True" Text="Settings"/>
+		</shell:ApplicationBar>
+	</phone:PhoneApplicationPage.ApplicationBar>
+    
+	<Grid x:Name="LayoutRoot"
+		Background="Transparent">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<!--TitlePanel contains the name of the application and page title-->
+		<StackPanel x:Name="TitlePanel"
+			Grid.Row="0"
+			Margin="24,24,0,12">
+			<TextBlock x:Name="ApplicationTitle"
+				Text="{Binding ApplicationTitle}"
+				Style="{StaticResource PhoneTextNormalStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" />
+		</StackPanel>
+		<StackPanel Margin="{StaticResource PhoneMargin}" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+			<!--ContentPanel - place additional content here-->
+			<es:BlockArrow Height="30" Orientation="Up" Stroke="{StaticResource PhoneAccentBrush}" UseLayoutRounding="False" Width="30" StrokeThickness="{StaticResource PhoneStrokeThickness}"/>
+			<!--ContentPanel - place additional content here-->
+			<TextBlock TextWrapping="Wrap" Text="{Binding Inst1, Mode=OneWay}" Margin="{StaticResource PhoneMargin}" TextAlignment="Center"/>
+		</StackPanel>
+
+		<!--ContentPanel - place additional content here-->
+		<es:BlockArrow x:Name="DirectionArrow" Fill="{StaticResource PhoneAccentBrush}" Orientation="Up" UseLayoutRounding="False" Width="200" Grid.Row="2" Height="250">
+			<es:BlockArrow.Projection>
+				<PlaneProjection RotationX="0" RotationY="0" RotationZ="0"/>
+			</es:BlockArrow.Projection>
+		</es:BlockArrow>
+		<StackPanel x:Name="ContentGrid"
+			Grid.Row="3" Orientation="Horizontal" Margin="{StaticResource PhoneMargin}">
+			<TextBlock x:Name="DistanceLabel" TextWrapping="Wrap" Text="Distance:"/>
+			<TextBlock x:Name="DistanceValueTextBlock" TextWrapping="Wrap" Text="{Binding Distance}" Margin="2,0,0,0"/>
+			<TextBlock x:Name="DistanceUnitTextBlock" TextWrapping="Wrap" Text="{Binding Unit}" Margin="2,0,0,0"/>
+		</StackPanel>
+	</Grid>
+
+
+</phone:PhoneApplicationPage>
