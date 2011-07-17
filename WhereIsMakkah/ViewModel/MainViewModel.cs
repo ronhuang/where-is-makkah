@@ -38,11 +38,38 @@ namespace WhereIsMakkah.ViewModel
             }
         }
 
+        /// <summary>
+        /// The <see cref="Feedback" /> property's name.
+        /// </summary>
+        public const string FeedbackPropertyName = "Feedback";
+
+        private string _feedback = "";
+
+        /// <summary>
+        /// Gets the Feedback property.
+        /// TODO Update documentation:
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// This property's value is broadcasted by the Messenger's default instance when it changes.
+        /// </summary>
         public string Feedback
         {
             get
             {
-                return "The big arrow should point to Makkah.";
+                return _feedback;
+            }
+
+            set
+            {
+                if (_feedback == value)
+                {
+                    return;
+                }
+
+                var oldValue = _feedback;
+                _feedback = value;
+
+                // Update bindings, no broadcast
+                RaisePropertyChanged(FeedbackPropertyName);
             }
         }
 
@@ -189,17 +216,89 @@ namespace WhereIsMakkah.ViewModel
             SensorStopCommand = new RelayCommand(() => StopSensor());
         }
 
-        private bool InitSensor()
-        {
-            return true;
-        }
+        private GeoCoordinateWatcher _watcher;
 
         private void StartSensor()
         {
+            if (_watcher == null)
+            {
+                _watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default);
+                _watcher.MovementThreshold = 20;
+                _watcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(_watcher_StatusChanged);
+                _watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(_watcher_PositionChanged);
+            }
+
+            Feedback = "Starting location service. This could take up to one minute.";
+
+            bool started = _watcher.TryStart(true, TimeSpan.FromMilliseconds(60000));
+            if (started)
+            {
+                if (_watcher.Status == GeoPositionStatus.Ready)
+                {
+                    Feedback = string.Format("Available: {0}, {1}, {2}",
+                        _watcher.Position.Location.Latitude.ToString("0.000"),
+                        _watcher.Position.Location.Longitude.ToString("0.000"),
+                        _watcher.Position.Location.Course.ToString("0.000"));
+                }
+                else
+                {
+                    Feedback = "Location data is not currently available. Please try again later.";
+                }
+            }
+            else
+            {
+                Feedback = "The location service could not be started.";
+            }
+        }
+
+        void _watcher_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
+        {
+            switch (e.Status)
+            {
+                case GeoPositionStatus.Disabled:
+                    if (_watcher.Permission == GeoPositionPermission.Denied)
+                    {
+                        Feedback = "This app does not have permission to access location.";
+                    }
+                    else
+                    {
+                        Feedback = "Location is not functioning on this device";
+                    }
+                    break;
+
+                case GeoPositionStatus.Initializing:
+                    break;
+
+                case GeoPositionStatus.NoData:
+                    Feedback = "Location data is not available.";
+                    break;
+
+                case GeoPositionStatus.Ready:
+                    Feedback = string.Format("Available: {0}, {1}, {2}",
+                        _watcher.Position.Location.Latitude.ToString("0.000"),
+                        _watcher.Position.Location.Longitude.ToString("0.000"),
+                        _watcher.Position.Location.Course.ToString("0.000"));
+                    break;
+            }
+        }
+
+        private void _watcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
+        {
+            Feedback = string.Format("{0}, {1}, {2}",
+                e.Position.Location.Latitude.ToString("0.000"),
+                e.Position.Location.Longitude.ToString("0.000"),
+                e.Position.Location.Course.ToString("0.000"));
         }
 
         private void StopSensor()
         {
+            if (_watcher == null)
+            {
+                return;
+            }
+
+            _watcher.Stop();
+            _watcher = null;
         }
 
         ////public override void Cleanup()
