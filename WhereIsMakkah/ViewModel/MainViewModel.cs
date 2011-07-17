@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows;
+using System.Device.Location;
+using Microsoft.Phone.Shell;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Threading;
 using GalaSoft.MvvmLight.Command;
@@ -82,8 +84,8 @@ namespace WhereIsMakkah.ViewModel
                 var oldValue = _unit;
                 _unit = value;
 
-                // Update bindings and broadcast change using GalaSoft.MvvmLight.Messenging
-                RaisePropertyChanged(UnitPropertyName, oldValue, value, true);
+                // Update bindings, no broadcast
+                RaisePropertyChanged(UnitPropertyName);
             }
         }
 
@@ -117,8 +119,43 @@ namespace WhereIsMakkah.ViewModel
                 var oldValue = _distance;
                 _distance = value;
 
-                // Update bindings and broadcast change using GalaSoft.MvvmLight.Messenging
-                RaisePropertyChanged(DistancePropertyName, oldValue, value, true);
+                // Update bindings, no broadcast
+                RaisePropertyChanged(DistancePropertyName);
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="Busy" /> property's name.
+        /// </summary>
+        public const string BusyPropertyName = "Busy";
+
+        private bool _busy = false;
+
+        /// <summary>
+        /// Gets the Busy property.
+        /// TODO Update documentation:
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// This property's value is broadcasted by the Messenger's default instance when it changes.
+        /// </summary>
+        public bool Busy
+        {
+            get
+            {
+                return _busy;
+            }
+
+            set
+            {
+                if (_busy == value)
+                {
+                    return;
+                }
+
+                var oldValue = _busy;
+                _busy = value;
+
+                // Update bindings, no broadcast
+                RaisePropertyChanged(BusyPropertyName);
             }
         }
 
