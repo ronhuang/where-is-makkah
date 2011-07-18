@@ -5,6 +5,7 @@ using Microsoft.Phone.Shell;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Threading;
 using GalaSoft.MvvmLight.Command;
+using WhereIsMakkah.Util;
 
 namespace WhereIsMakkah.ViewModel
 {
@@ -73,11 +74,16 @@ namespace WhereIsMakkah.ViewModel
             }
         }
 
+        /// <summary>
+        /// The <see cref="Unit" /> property's name.
+        /// </summary>
+        public const string DistanceLabelPropertyName = "DistanceLabel";
+
         public string DistanceLabel
         {
             get
             {
-                return string.Format("Distance to Makkah is {0} {1}.", _distance, _unit);
+                return string.Format("Distance to Makkah is approximately {0} {1}.", _distance.ToString("0"), _unit);
             }
         }
 
@@ -113,6 +119,7 @@ namespace WhereIsMakkah.ViewModel
 
                 // Update bindings, no broadcast
                 RaisePropertyChanged(UnitPropertyName);
+                RaisePropertyChanged(DistanceLabelPropertyName);
             }
         }
 
@@ -121,7 +128,7 @@ namespace WhereIsMakkah.ViewModel
         /// </summary>
         public const string DistancePropertyName = "Distance";
 
-        private float _distance = 0;
+        private double _distance = 0;
 
         /// <summary>
         /// Gets the Distance property.
@@ -129,7 +136,7 @@ namespace WhereIsMakkah.ViewModel
         /// Changes to that property's value raise the PropertyChanged event. 
         /// This property's value is broadcasted by the Messenger's default instance when it changes.
         /// </summary>
-        public float Distance
+        public double Distance
         {
             get
             {
@@ -148,6 +155,42 @@ namespace WhereIsMakkah.ViewModel
 
                 // Update bindings, no broadcast
                 RaisePropertyChanged(DistancePropertyName);
+                RaisePropertyChanged(DistanceLabelPropertyName);
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="Bearing" /> property's name.
+        /// </summary>
+        public const string BearingPropertyName = "Bearing";
+
+        private double _bearing = 0.0;
+
+        /// <summary>
+        /// Gets the Bearing property.
+        /// TODO Update documentation:
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// This property's value is broadcasted by the Messenger's default instance when it changes.
+        /// </summary>
+        public double Bearing
+        {
+            get
+            {
+                return _bearing;
+            }
+
+            set
+            {
+                if (_bearing == value)
+                {
+                    return;
+                }
+
+                var oldValue = _bearing;
+                _bearing = value;
+
+                // Update bindings, no broadcast
+                RaisePropertyChanged(BearingPropertyName);
             }
         }
 
@@ -216,6 +259,7 @@ namespace WhereIsMakkah.ViewModel
             SensorStopCommand = new RelayCommand(() => StopSensor());
         }
 
+        private static readonly GeoCoordinate Makkah = new GeoCoordinate(21.4166666666666667, 39.8166666666666667);
         private GeoCoordinateWatcher _watcher;
 
         private void StartSensor()
@@ -225,30 +269,12 @@ namespace WhereIsMakkah.ViewModel
                 _watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default);
                 _watcher.MovementThreshold = 20;
                 _watcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(_watcher_StatusChanged);
-                _watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(_watcher_PositionChanged);
             }
 
-            Feedback = "Starting location service. This could take up to one minute.";
+            Feedback = "Starting location service. This could take up a while.";
 
-            bool started = _watcher.TryStart(true, TimeSpan.FromMilliseconds(60000));
-            if (started)
-            {
-                if (_watcher.Status == GeoPositionStatus.Ready)
-                {
-                    Feedback = string.Format("Available: {0}, {1}, {2}",
-                        _watcher.Position.Location.Latitude.ToString("0.000"),
-                        _watcher.Position.Location.Longitude.ToString("0.000"),
-                        _watcher.Position.Location.Course.ToString("0.000"));
-                }
-                else
-                {
-                    Feedback = "Location data is not currently available. Please try again later.";
-                }
-            }
-            else
-            {
-                Feedback = "The location service could not be started.";
-            }
+            Busy = true;
+            _watcher.Start();
         }
 
         void _watcher_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
@@ -258,36 +284,39 @@ namespace WhereIsMakkah.ViewModel
                 case GeoPositionStatus.Disabled:
                     if (_watcher.Permission == GeoPositionPermission.Denied)
                     {
-                        Feedback = "This app does not have permission to access location.";
+                        Feedback = "Application does not have permission to access location.";
                     }
                     else
                     {
                         Feedback = "Location is not functioning on this device";
                     }
+
+                    Busy = false;
+                    _watcher.Stop();
                     break;
 
                 case GeoPositionStatus.Initializing:
+                    // moving on.
                     break;
 
                 case GeoPositionStatus.NoData:
                     Feedback = "Location data is not available.";
+
+                    Busy = false;
+                    _watcher.Stop();
                     break;
 
                 case GeoPositionStatus.Ready:
-                    Feedback = string.Format("Available: {0}, {1}, {2}",
-                        _watcher.Position.Location.Latitude.ToString("0.000"),
-                        _watcher.Position.Location.Longitude.ToString("0.000"),
-                        _watcher.Position.Location.Course.ToString("0.000"));
+                    GeoCoordinate loc = _watcher.Position.Location;
+
+                    Feedback = "Large arrow is pointing toward Makkah.";
+                    Distance = GeoDistanceCalculator.DistanceInKilometers(loc.Latitude, loc.Longitude, Makkah.Latitude, Makkah.Longitude);
+                    Bearing = GeoDistanceCalculator.InitialBearing(loc.Latitude, loc.Longitude, Makkah.Latitude, Makkah.Longitude);
+
+                    Busy = false;
+                    _watcher.Stop();
                     break;
             }
-        }
-
-        private void _watcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
-        {
-            Feedback = string.Format("{0}, {1}, {2}",
-                e.Position.Location.Latitude.ToString("0.000"),
-                e.Position.Location.Longitude.ToString("0.000"),
-                e.Position.Location.Course.ToString("0.000"));
         }
 
         private void StopSensor()
@@ -297,7 +326,9 @@ namespace WhereIsMakkah.ViewModel
                 return;
             }
 
+            Busy = false;
             _watcher.Stop();
+
             _watcher = null;
         }
 
