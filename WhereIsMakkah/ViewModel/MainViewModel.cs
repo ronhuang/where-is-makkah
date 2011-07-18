@@ -271,6 +271,11 @@ namespace WhereIsMakkah.ViewModel
                 _watcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(_watcher_StatusChanged);
             }
 
+            if (Busy)
+            {
+                return;
+            }
+
             Feedback = "Starting location service. This could take up a while.";
 
             Busy = true;
@@ -328,8 +333,6 @@ namespace WhereIsMakkah.ViewModel
 
             Busy = false;
             _watcher.Stop();
-
-            _watcher = null;
         }
 
         ////public override void Cleanup()

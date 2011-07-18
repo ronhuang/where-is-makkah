@@ -1,7 +1,9 @@
-﻿using Microsoft.Phone.Controls;
+﻿using System;
+using Microsoft.Phone.Controls;
 using System.Windows.Media;
 using Microsoft.Phone.Shell;
 using System.Windows.Data;
+using WhereIsMakkah.ViewModel;
 
 namespace WhereIsMakkah
 {
@@ -39,6 +41,19 @@ namespace WhereIsMakkah
 
                     SystemTray.SetProgressIndicator(this, null);
                 };
+        }
+
+        private void RefreshClicked(object sender, EventArgs e)
+        {
+            var vm = DataContext as MainViewModel;
+            if (vm != null)
+            {
+                vm.SensorStartCommand.Execute(null);
+            }
+        }
+
+        private void SettingsClicked(object sender, EventArgs e)
+        {
         }
     }
 }
