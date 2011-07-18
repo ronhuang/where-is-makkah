@@ -16,6 +16,22 @@
                             d:DesignHeight="768"
                             shell:SystemTray.IsVisible="True"
                             DataContext="{Binding Main, Source={StaticResource Locator}}">
+	<phone:PhoneApplicationPage.Resources>
+		<Storyboard x:Name="IndeterminateArrow" RepeatBehavior="Forever">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationZ)" Storyboard.TargetName="DirectionArrow">
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="2"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="-2"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+		<Storyboard x:Name="DeterminateArrow">
+			<DoubleAnimation Duration="0:0:3" To="90" Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationZ)" Storyboard.TargetName="DirectionArrow" d:IsOptimized="True">
+				<DoubleAnimation.EasingFunction>
+					<BackEase Amplitude="0.5" EasingMode="EaseOut"/>
+				</DoubleAnimation.EasingFunction>
+			</DoubleAnimation>
+		</Storyboard>
+	</phone:PhoneApplicationPage.Resources>
 	<i:Interaction.Triggers>
 		<i:EventTrigger>
 			<GalaSoft_MvvmLight_Command:EventToCommand Command="{Binding SensorStartCommand, Mode=OneWay}"/>
@@ -59,7 +75,7 @@
 		<!--ContentPanel - place additional content here-->
 		<es:BlockArrow x:Name="DirectionArrow" Fill="{StaticResource PhoneAccentBrush}" Orientation="Up" UseLayoutRounding="False" Width="200" Grid.Row="2" Height="250">
 			<es:BlockArrow.Projection>
-				<PlaneProjection RotationX="0" RotationY="0" RotationZ="{Binding ArrowRotateZ}"/>
+				<PlaneProjection RotationX="0" RotationY="0" RotationZ="0"/>
 			</es:BlockArrow.Projection>
 		</es:BlockArrow>
 		<TextBlock Text="{Binding Feedback, Mode=OneWay}" Margin="{StaticResource PhoneMargin}" d:LayoutOverrides="Width" Grid.Row="3" HorizontalAlignment="Center"/>

@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Threading;
 using GalaSoft.MvvmLight.Command;
 using WhereIsMakkah.Util;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace WhereIsMakkah.ViewModel
 {
@@ -279,10 +280,12 @@ namespace WhereIsMakkah.ViewModel
             Feedback = "Starting location service. This could take up a while.";
 
             Busy = true;
+            var msg = new AnimateArrowMessage() { Run = true, Indeterminate = true };
+            Messenger.Default.Send<AnimateArrowMessage>(msg);
             _watcher.Start();
         }
 
-        void _watcher_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
+        private void _watcher_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
         {
             switch (e.Status)
             {
@@ -296,8 +299,7 @@ namespace WhereIsMakkah.ViewModel
                         Feedback = "Location is not functioning on this device";
                     }
 
-                    Busy = false;
-                    _watcher.Stop();
+                    StopSensor();
                     break;
 
                 case GeoPositionStatus.Initializing:
@@ -307,8 +309,7 @@ namespace WhereIsMakkah.ViewModel
                 case GeoPositionStatus.NoData:
                     Feedback = "Location data is not available.";
 
-                    Busy = false;
-                    _watcher.Stop();
+                    StopSensor();
                     break;
 
                 case GeoPositionStatus.Ready:
@@ -316,10 +317,12 @@ namespace WhereIsMakkah.ViewModel
 
                     Feedback = "Large arrow is pointing toward Makkah.";
                     Distance = GeoDistanceCalculator.DistanceInKilometers(loc.Latitude, loc.Longitude, Makkah.Latitude, Makkah.Longitude);
-                    ArrowRotateZ = 360.0 - GeoDistanceCalculator.InitialBearing(loc.Latitude, loc.Longitude, Makkah.Latitude, Makkah.Longitude); // counter-clockwise
 
-                    Busy = false;
-                    _watcher.Stop();
+                    var destZ = 360.0 - GeoDistanceCalculator.InitialBearing(loc.Latitude, loc.Longitude, Makkah.Latitude, Makkah.Longitude); // counter-clockwise
+
+                    StopSensor();
+                    var msg = new AnimateArrowMessage() { Run = true, Indeterminate = false, DestinationZ = destZ };
+                    Messenger.Default.Send<AnimateArrowMessage>(msg);
                     break;
             }
         }
@@ -332,6 +335,8 @@ namespace WhereIsMakkah.ViewModel
             }
 
             Busy = false;
+            var msg = new AnimateArrowMessage() { Run = false };
+            Messenger.Default.Send<AnimateArrowMessage>(msg);
             _watcher.Stop();
         }
 
