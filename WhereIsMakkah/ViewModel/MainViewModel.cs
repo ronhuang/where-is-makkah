@@ -242,6 +242,12 @@ namespace WhereIsMakkah.ViewModel
             private set;
         }
 
+        public RelayCommand SettingsCommand
+        {
+            get;
+            private set;
+        }
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -258,6 +264,7 @@ namespace WhereIsMakkah.ViewModel
 
             SensorStartCommand = new RelayCommand(() => StartSensor());
             SensorStopCommand = new RelayCommand(() => StopSensor());
+            SettingsCommand = new RelayCommand(() => GoToSettingsPage());
         }
 
         private static readonly GeoCoordinate Makkah = new GeoCoordinate(21.4166666666666667, 39.8166666666666667);
@@ -338,6 +345,12 @@ namespace WhereIsMakkah.ViewModel
             var msg = new AnimateArrowMessage() { Run = false };
             Messenger.Default.Send<AnimateArrowMessage>(msg);
             _watcher.Stop();
+        }
+
+        private void GoToSettingsPage()
+        {
+            var msg = new GoToPageMessage() { PageName = "SettingsPage" };
+            Messenger.Default.Send<GoToPageMessage>(msg);
         }
 
         ////public override void Cleanup()

@@ -7,6 +7,7 @@ using WhereIsMakkah.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
 using WhereIsMakkah.Util;
 using System.Windows.Media.Animation;
+using System.Text;
 
 namespace WhereIsMakkah
 {
@@ -48,6 +49,7 @@ namespace WhereIsMakkah
                 };
 
             Messenger.Default.Register<AnimateArrowMessage>(this, (msg) => ReceiveMessage(msg));
+            Messenger.Default.Register<GoToPageMessage>(this, (msg) => ReceiveMessage(msg));
         }
 
         private void RefreshClicked(object sender, EventArgs e)
@@ -61,6 +63,11 @@ namespace WhereIsMakkah
 
         private void SettingsClicked(object sender, EventArgs e)
         {
+            var vm = DataContext as MainViewModel;
+            if (vm != null)
+            {
+                vm.SettingsCommand.Execute(null);
+            }
         }
 
         private object ReceiveMessage(AnimateArrowMessage msg)
@@ -107,6 +114,16 @@ namespace WhereIsMakkah
                     DeterminateArrow.Stop();
                 }
             }
+            return null;
+        }
+
+        private object ReceiveMessage(GoToPageMessage msg)
+        {
+            StringBuilder sb = new StringBuilder("/View/");
+            sb.Append(msg.PageName);
+            sb.Append(".xaml");
+
+            NavigationService.Navigate(new System.Uri(sb.ToString(), System.UriKind.Relative));
             return null;
         }
     }

@@ -56,6 +56,7 @@ namespace WhereIsMakkah.ViewModel
     public class ViewModelLocator
     {
         private static MainViewModel _main;
+        private static SettingsViewModel _settingsViewModel;
 
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
@@ -72,6 +73,7 @@ namespace WhereIsMakkah.ViewModel
             ////}
 
             CreateMain();
+            CreateSettings();
         }
 
         /// <summary>
@@ -125,11 +127,62 @@ namespace WhereIsMakkah.ViewModel
         }
 
         /// <summary>
+        /// Gets the Settings property.
+        /// </summary>
+        public static SettingsViewModel SettingsStatic
+        {
+            get
+            {
+                if (_settingsViewModel == null)
+                {
+                    CreateSettings();
+                }
+
+                return _settingsViewModel;
+            }
+        }
+
+        /// <summary>
+        /// Gets the Settings property.
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public SettingsViewModel Settings
+        {
+            get
+            {
+                return SettingsStatic;
+            }
+        }
+
+        /// <summary>
+        /// Provides a deterministic way to delete the Settings property.
+        /// </summary>
+        public static void ClearSettings()
+        {
+            _settingsViewModel.Cleanup();
+            _settingsViewModel = null;
+        }
+
+        /// <summary>
+        /// Provides a deterministic way to create the Settings property.
+        /// </summary>
+        public static void CreateSettings()
+        {
+            if (_settingsViewModel == null)
+            {
+                _settingsViewModel = new SettingsViewModel();
+            }
+        }
+
+        /// <summary>
         /// Cleans up all the resources.
         /// </summary>
         public static void Cleanup()
         {
             ClearMain();
+            ClearSettings();
         }
     }
 }
