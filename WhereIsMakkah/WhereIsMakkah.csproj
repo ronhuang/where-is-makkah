@@ -75,7 +75,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\AppSettings.cs" />
     <Compile Include="Util\AnimateArrowMessage.cs" />
+    <Compile Include="Util\SettingsChangedMessage.cs" />
     <Compile Include="Util\GoToPageMessage.cs" />
     <Compile Include="Util\GeoDistanceCalculator.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -124,9 +126,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>

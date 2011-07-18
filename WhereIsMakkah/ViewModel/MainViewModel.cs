@@ -75,51 +75,32 @@ namespace WhereIsMakkah.ViewModel
             }
         }
 
-        /// <summary>
-        /// The <see cref="Unit" /> property's name.
-        /// </summary>
-        public const string DistanceLabelPropertyName = "DistanceLabel";
-
-        public string DistanceLabel
-        {
-            get
-            {
-                return string.Format("Makkah is approximately {0} {1} away.", _distance.ToString("0"), _unit);
-            }
-        }
+        private bool _metricSetting = App.AppSettings.MetricSetting;
 
         /// <summary>
-        /// The <see cref="Unit" /> property's name.
-        /// </summary>
-        public const string UnitPropertyName = "Unit";
-
-        private string _unit = "meters";
-
-        /// <summary>
-        /// Gets the Unit property.
+        /// Gets the MetricSetting property.
         /// TODO Update documentation:
         /// Changes to that property's value raise the PropertyChanged event. 
         /// This property's value is broadcasted by the Messenger's default instance when it changes.
         /// </summary>
-        public string Unit
+        public bool MetricSetting
         {
             get
             {
-                return _unit;
+                return _metricSetting;
             }
 
             set
             {
-                if (_unit == value)
+                if (_metricSetting == value)
                 {
                     return;
                 }
 
-                var oldValue = _unit;
-                _unit = value;
+                var oldValue = _metricSetting;
+                _metricSetting = value;
 
                 // Update bindings, no broadcast
-                RaisePropertyChanged(UnitPropertyName);
                 RaisePropertyChanged(DistanceLabelPropertyName);
             }
         }
@@ -129,7 +110,7 @@ namespace WhereIsMakkah.ViewModel
         /// </summary>
         public const string DistancePropertyName = "Distance";
 
-        private double _distance = 0;
+        private double _distance = 0.0;
 
         /// <summary>
         /// Gets the Distance property.
@@ -141,7 +122,14 @@ namespace WhereIsMakkah.ViewModel
         {
             get
             {
-                return _distance;
+                if (MetricSetting)
+                {
+                    return _distance;
+                }
+                else
+                {
+                    return _distance * 0.621371192;
+                }
             }
 
             set
@@ -155,43 +143,22 @@ namespace WhereIsMakkah.ViewModel
                 _distance = value;
 
                 // Update bindings, no broadcast
-                RaisePropertyChanged(DistancePropertyName);
                 RaisePropertyChanged(DistanceLabelPropertyName);
             }
         }
 
         /// <summary>
-        /// The <see cref="ArrowRotateZ" /> property's name.
+        /// The <see cref="Unit" /> property's name.
         /// </summary>
-        public const string ArrowRotateZPropertyName = "ArrowRotateZ";
+        public const string DistanceLabelPropertyName = "DistanceLabel";
 
-        private double _arrowRotateZ = 0.0;
-
-        /// <summary>
-        /// Gets the ArrowRotateZ property.
-        /// TODO Update documentation:
-        /// Changes to that property's value raise the PropertyChanged event. 
-        /// This property's value is broadcasted by the Messenger's default instance when it changes.
-        /// </summary>
-        public double ArrowRotateZ
+        public string DistanceLabel
         {
             get
             {
-                return _arrowRotateZ;
-            }
-
-            set
-            {
-                if (_arrowRotateZ == value)
-                {
-                    return;
-                }
-
-                var oldValue = _arrowRotateZ;
-                _arrowRotateZ = value;
-
-                // Update bindings, no broadcast
-                RaisePropertyChanged(ArrowRotateZPropertyName);
+                return string.Format("Makkah is approximately {0} {1} away.",
+                    Distance.ToString("0"),
+                    MetricSetting ? "kilometer(s)" : "mile(s)");
             }
         }
 
@@ -265,6 +232,8 @@ namespace WhereIsMakkah.ViewModel
             SensorStartCommand = new RelayCommand(() => StartSensor());
             SensorStopCommand = new RelayCommand(() => StopSensor());
             SettingsCommand = new RelayCommand(() => GoToSettingsPage());
+
+            Messenger.Default.Register<SettingsChangedMessage>(this, (msg) => ReceiveMessage(msg));
         }
 
         private static readonly GeoCoordinate Makkah = new GeoCoordinate(21.4166666666666667, 39.8166666666666667);
@@ -351,6 +320,16 @@ namespace WhereIsMakkah.ViewModel
         {
             var msg = new GoToPageMessage() { PageName = "SettingsPage" };
             Messenger.Default.Send<GoToPageMessage>(msg);
+        }
+
+        private void ReceiveMessage(SettingsChangedMessage msg)
+        {
+            // FIXME: for the time being, only raise unit propery
+            var key = msg.Key;
+            if (key.Equals("Unit"))
+            {
+                MetricSetting = App.AppSettings.MetricSetting;
+            }
         }
 
         ////public override void Cleanup()

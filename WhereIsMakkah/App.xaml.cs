@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using WhereIsMakkah.ViewModel;
+using WhereIsMakkah.Model;
 
 namespace WhereIsMakkah
 {
@@ -21,6 +22,9 @@ namespace WhereIsMakkah
 
         // Easy access to the root frame
         public PhoneApplicationFrame RootFrame { get; private set; }
+
+        // Easy access to application settings
+        private static AppSettings _appSettings;
 
         // Constructor
         public App()
@@ -53,7 +57,11 @@ namespace WhereIsMakkah
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
+        }
 
+        public static AppSettings AppSettings
+        {
+            get { return _appSettings ?? (_appSettings = new AppSettings()); }
         }
 
         // Code to execute when the application is launching (eg, from Start)

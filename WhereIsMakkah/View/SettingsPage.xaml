@@ -30,8 +30,8 @@
                 		<RowDefinition Height="Auto"/>
                 	</Grid.RowDefinitions>
                 	<TextBlock Style="{StaticResource PhoneTextSmallStyle}" HorizontalAlignment="Left" Text="{Binding UnitLabel, Mode=OneWay}" d:LayoutOverrides="Height"/>
-                	<RadioButton Content="{Binding MetricLabel, Mode=OneWay}" HorizontalAlignment="Left" d:LayoutOverrides="Height" Grid.Row="1"/>
-                	<RadioButton Content="{Binding ImperialLabel, Mode=OneWay}" HorizontalAlignment="Left" d:LayoutOverrides="Height" Grid.Row="2"/>
+                	<RadioButton Content="{Binding MetricLabel, Mode=OneWay}" HorizontalAlignment="Left" d:LayoutOverrides="Height" Grid.Row="1" GroupName="UnitGroup" IsChecked="{Binding MetricSetting, Mode=TwoWay}"/>
+                	<RadioButton Content="{Binding ImperialLabel, Mode=OneWay}" HorizontalAlignment="Left" d:LayoutOverrides="Height" Grid.Row="2" GroupName="UnitGroup" IsChecked="{Binding ImperialSetting, Mode=TwoWay}"/>
                 </Grid>
             </controls:PivotItem>
 

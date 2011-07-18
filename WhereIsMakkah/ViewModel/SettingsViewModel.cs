@@ -1,4 +1,8 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
+using WhereIsMakkah.Util;
+using WhereIsMakkah.Model;
 
 namespace WhereIsMakkah.ViewModel
 {
@@ -44,7 +48,7 @@ namespace WhereIsMakkah.ViewModel
         {
             get
             {
-                return "Metric (meters)";
+                return "Metric (kilometers)";
             }
         }
 
@@ -77,6 +81,44 @@ namespace WhereIsMakkah.ViewModel
             ////{
             ////    // Code runs "for real": Connect to service, etc...
             ////}
+        }
+
+        private void SendSettingsChangedMessage(string key)
+        {
+            var msg = new SettingsChangedMessage() { Key = key };
+            Messenger.Default.Send<SettingsChangedMessage>(msg);
+        }
+
+        /// <summary>
+        /// Property to get and set a RadioButton Setting Key.
+        /// </summary>
+        public bool MetricSetting
+        {
+            get
+            {
+                return App.AppSettings.MetricSetting;
+            }
+            set
+            {
+                App.AppSettings.MetricSetting = value;
+                SendSettingsChangedMessage("Unit");
+            }
+        }
+
+        /// <summary>
+        /// Property to get and set a RadioButton Setting Key.
+        /// </summary>
+        public bool ImperialSetting
+        {
+            get
+            {
+                return !App.AppSettings.MetricSetting;
+            }
+            set
+            {
+                App.AppSettings.MetricSetting = !value;
+                SendSettingsChangedMessage("Unit");
+            }
         }
 
         ////public override void Cleanup()
