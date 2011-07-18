@@ -83,7 +83,7 @@ namespace WhereIsMakkah.ViewModel
         {
             get
             {
-                return string.Format("Distance to Makkah is approximately {0} {1}.", _distance.ToString("0"), _unit);
+                return string.Format("Makkah is approximately {0} {1} away.", _distance.ToString("0"), _unit);
             }
         }
 
