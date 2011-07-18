@@ -68,6 +68,44 @@ namespace WhereIsMakkah.ViewModel
             }
         }
 
+        public string VersionLabel
+        {
+            get
+            {
+                const string VerLabel = "Version=";
+                string assemblyName = System.Reflection.Assembly.GetExecutingAssembly().FullName;
+                int startIndex = assemblyName.IndexOf(VerLabel) + VerLabel.Length;
+                int endIndex = assemblyName.IndexOf(',', startIndex + 1);
+                string version = assemblyName.Substring(startIndex, endIndex - startIndex);
+
+                return string.Format("Version: {0}", version);
+            }
+        }
+
+        public string AboutLabel
+        {
+            get
+            {
+                return "Where Is Makkah shows the direction to Makkah (Mecca.)";
+            }
+        }
+
+        public string NoteLabel
+        {
+            get
+            {
+                return "Note: since Windows Phone 7 does not support Compass API yet (will be available in 7.1,) you have to manually point the top of the phone toward north first to show the direction to Makkah.";
+            }
+        }
+
+        public string DonateLabel
+        {
+            get
+            {
+                return "Please click the ad if you like this application.";
+            }
+        }
+
         /// <summary>
         /// Initializes a new instance of the SettingsViewModel class.
         /// </summary>

@@ -12,6 +12,7 @@
     d:DesignHeight="768"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:GalaSoft_MvvmLight_Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71"
+    xmlns:google="clr-namespace:Google.AdMob.Ads.WindowsPhone7.WPF;assembly=Google.AdMob.Ads.WindowsPhone7"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -40,7 +41,29 @@
 
             <!--Pivot item two-->
             <controls:PivotItem Header="{Binding AboutTitle, Mode=OneWay}">
-                <Grid/>
+                <Grid>
+                	<Grid.RowDefinitions>
+                		<RowDefinition Height="Auto"/>
+                		<RowDefinition Height="Auto"/>
+                		<RowDefinition Height="Auto"/>
+                		<RowDefinition/>
+                		<RowDefinition Height="Auto"/>
+                		<RowDefinition Height="Auto"/>
+                	</Grid.RowDefinitions>
+                	<TextBlock Grid.Row="0" Style="{StaticResource PhoneTextLargeStyle}" HorizontalAlignment="Left"
+						Text="{Binding AboutLabel, Mode=OneWay}" d:LayoutOverrides="Height"
+						Margin="{StaticResource PhoneMargin}" TextWrapping="Wrap" />
+                	<TextBlock Grid.Row="1" Style="{StaticResource PhoneTextNormalStyle}" HorizontalAlignment="Left"
+						Text="{Binding VersionLabel, Mode=OneWay}" d:LayoutOverrides="Height"
+						Margin="{StaticResource PhoneMargin}" />
+                	<TextBlock Grid.Row="2" Style="{StaticResource PhoneTextSmallStyle}" HorizontalAlignment="Left"
+						Text="{Binding NoteLabel, Mode=OneWay}" d:LayoutOverrides="Height"
+						Margin="{StaticResource PhoneMargin}" TextWrapping="Wrap" />
+                	<TextBlock Grid.Row="4" Style="{StaticResource PhoneTextNormalStyle}" HorizontalAlignment="Left"
+						Text="{Binding DonateLabel, Mode=OneWay}" d:LayoutOverrides="Height"
+						Margin="{StaticResource PhoneMargin}" TextWrapping="Wrap" />
+                	<google:BannerAd Grid.Row="5" Margin="12,0,12,0" AdUnitID="a14e245ad6bc9a4"  />
+                </Grid>
             </controls:PivotItem>
         </controls:Pivot>
     </Grid>
