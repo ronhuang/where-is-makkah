@@ -26,8 +26,8 @@
 	</i:Interaction.Triggers>
 	<phone:PhoneApplicationPage.ApplicationBar>
 		<shell:ApplicationBar IsMenuEnabled="False">
-			<shell:ApplicationBarIconButton IconUri="/icons/appbar.refresh.rest.png" IsEnabled="True" Text="Refresh"/>
-			<shell:ApplicationBarIconButton IconUri="/icons/appbar.feature.settings.rest.png" IsEnabled="True" Text="Settings"/>
+			<shell:ApplicationBarIconButton IconUri="/Icon/appbar.refresh.rest.png" IsEnabled="True" Text="Refresh"/>
+			<shell:ApplicationBarIconButton IconUri="/Icon/appbar.feature.settings.rest.png" IsEnabled="True" Text="Settings"/>
 		</shell:ApplicationBar>
 	</phone:PhoneApplicationPage.ApplicationBar>
     
