@@ -160,37 +160,37 @@ namespace WhereIsMakkah.ViewModel
         }
 
         /// <summary>
-        /// The <see cref="Bearing" /> property's name.
+        /// The <see cref="ArrowRotateZ" /> property's name.
         /// </summary>
-        public const string BearingPropertyName = "Bearing";
+        public const string ArrowRotateZPropertyName = "ArrowRotateZ";
 
-        private double _bearing = 0.0;
+        private double _arrowRotateZ = 0.0;
 
         /// <summary>
-        /// Gets the Bearing property.
+        /// Gets the ArrowRotateZ property.
         /// TODO Update documentation:
         /// Changes to that property's value raise the PropertyChanged event. 
         /// This property's value is broadcasted by the Messenger's default instance when it changes.
         /// </summary>
-        public double Bearing
+        public double ArrowRotateZ
         {
             get
             {
-                return _bearing;
+                return _arrowRotateZ;
             }
 
             set
             {
-                if (_bearing == value)
+                if (_arrowRotateZ == value)
                 {
                     return;
                 }
 
-                var oldValue = _bearing;
-                _bearing = value;
+                var oldValue = _arrowRotateZ;
+                _arrowRotateZ = value;
 
                 // Update bindings, no broadcast
-                RaisePropertyChanged(BearingPropertyName);
+                RaisePropertyChanged(ArrowRotateZPropertyName);
             }
         }
 
@@ -316,7 +316,7 @@ namespace WhereIsMakkah.ViewModel
 
                     Feedback = "Large arrow is pointing toward Makkah.";
                     Distance = GeoDistanceCalculator.DistanceInKilometers(loc.Latitude, loc.Longitude, Makkah.Latitude, Makkah.Longitude);
-                    Bearing = GeoDistanceCalculator.InitialBearing(loc.Latitude, loc.Longitude, Makkah.Latitude, Makkah.Longitude);
+                    ArrowRotateZ = 360.0 - GeoDistanceCalculator.InitialBearing(loc.Latitude, loc.Longitude, Makkah.Latitude, Makkah.Longitude); // counter-clockwise
 
                     Busy = false;
                     _watcher.Stop();

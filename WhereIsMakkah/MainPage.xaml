@@ -59,7 +59,7 @@
 		<!--ContentPanel - place additional content here-->
 		<es:BlockArrow x:Name="DirectionArrow" Fill="{StaticResource PhoneAccentBrush}" Orientation="Up" UseLayoutRounding="False" Width="200" Grid.Row="2" Height="250">
 			<es:BlockArrow.Projection>
-				<PlaneProjection RotationX="0" RotationY="0" RotationZ="0"/>
+				<PlaneProjection RotationX="0" RotationY="0" RotationZ="{Binding ArrowRotateZ}"/>
 			</es:BlockArrow.Projection>
 		</es:BlockArrow>
 		<TextBlock Text="{Binding Feedback, Mode=OneWay}" Margin="{StaticResource PhoneMargin}" d:LayoutOverrides="Width" Grid.Row="3" HorizontalAlignment="Center"/>

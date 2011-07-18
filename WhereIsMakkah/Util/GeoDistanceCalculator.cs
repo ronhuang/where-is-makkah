@@ -17,16 +17,16 @@ namespace WhereIsMakkah.Util
             return Distance(lat1, lng1, lat2, lng2, _earthRadiusInKilometers);
         }
 
+        // Initial bearing in degrees clockwise from North
         public static double InitialBearing(double lat1, double lng1, double lat2, double lng2)
         {
-            var rLat = ToRadians(lat2 - lat1);
             var rLng = ToRadians(lng2 - lng1);
             var rLat1 = ToRadians(lat1);
             var rLat2 = ToRadians(lat2);
             var cosLat2 = Math.Cos(rLat2);
 
-            var x = Math.Sin(rLat) * cosLat2;
-            var y = Math.Cos(rLat1) * Math.Sin(rLat2) - Math.Sin(rLat1) * cosLat2 * Math.Cos(rLng);
+            var y = Math.Sin(rLng) * cosLat2;
+            var x = Math.Cos(rLat1) * Math.Sin(rLat2) - Math.Sin(rLat1) * cosLat2 * Math.Cos(rLng);
             return ToDegree(Math.Atan2(y, x));
         }
 
