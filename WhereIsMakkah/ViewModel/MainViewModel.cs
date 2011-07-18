@@ -41,6 +41,41 @@ namespace WhereIsMakkah.ViewModel
         }
 
         /// <summary>
+        /// The <see cref="CurrentRotationZ" /> property's name.
+        /// </summary>
+        public const string CurrentRotationZPropertyName = "CurrentRotationZ";
+
+        private double _currentRotationZ = 0.0;
+
+        /// <summary>
+        /// Gets the CurrentRotationZ property.
+        /// TODO Update documentation:
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// This property's value is broadcasted by the Messenger's default instance when it changes.
+        /// </summary>
+        public double CurrentRotationZ
+        {
+            get
+            {
+                return _currentRotationZ;
+            }
+
+            set
+            {
+                if (_currentRotationZ == value)
+                {
+                    return;
+                }
+
+                var oldValue = _currentRotationZ;
+                _currentRotationZ = value;
+
+                // Update bindings, no broadcast
+                RaisePropertyChanged(CurrentRotationZPropertyName);
+            }
+        }
+
+        /// <summary>
         /// The <see cref="Feedback" /> property's name.
         /// </summary>
         public const string FeedbackPropertyName = "Feedback";

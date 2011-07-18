@@ -13,8 +13,6 @@ namespace WhereIsMakkah
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        private double currentRotationZ = 0.0;
-
         // Constructor
         public MainPage()
         {
@@ -81,10 +79,11 @@ namespace WhereIsMakkah
                         return null;
                     }
 
+                    var vm = DataContext as MainViewModel;
                     var anim = IndeterminateArrow.Children[0] as DoubleAnimationUsingKeyFrames;
-                    anim.KeyFrames[0].Value = currentRotationZ + 2.0;
-                    anim.KeyFrames[1].Value = currentRotationZ - 2.0;
-                    anim.KeyFrames[2].Value = currentRotationZ;
+                    anim.KeyFrames[0].Value = vm.CurrentRotationZ + 2.0;
+                    anim.KeyFrames[1].Value = vm.CurrentRotationZ - 2.0;
+                    anim.KeyFrames[2].Value = vm.CurrentRotationZ;
 
                     IndeterminateArrow.Begin();
                 }
@@ -95,10 +94,11 @@ namespace WhereIsMakkah
                         return null;
                     }
 
+                    var vm = DataContext as MainViewModel;
                     var anim = DeterminateArrow.Children[0] as DoubleAnimation;
-                    anim.From = currentRotationZ;
+                    anim.From = vm.CurrentRotationZ;
                     anim.To = msg.DestinationZ;
-                    currentRotationZ = msg.DestinationZ;
+                    vm.CurrentRotationZ = msg.DestinationZ;
 
                     DeterminateArrow.Begin();
                 }
