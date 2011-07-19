@@ -110,7 +110,7 @@ namespace WhereIsMakkah.ViewModel
             }
         }
 
-        private bool _metricSetting = App.AppSettings.MetricSetting;
+        private bool _metricSetting = true;
 
         /// <summary>
         /// Gets the MetricSetting property.
@@ -262,6 +262,7 @@ namespace WhereIsMakkah.ViewModel
             else
             {
                 // Code runs "for real"
+                _metricSetting = App.AppSettings.MetricSetting;
             }
 
             SensorStartCommand = new RelayCommand(() => StartSensor());
