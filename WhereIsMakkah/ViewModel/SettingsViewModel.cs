@@ -111,14 +111,15 @@ namespace WhereIsMakkah.ViewModel
         /// </summary>
         public SettingsViewModel()
         {
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real": Connect to service, etc...
-            ////}
+            if (IsInDesignMode)
+            {
+                // Code runs in Blend --> create design time data.
+            }
+            else
+            {
+                // Code runs "for real": Connect to service, etc...
+                _metricSetting = App.AppSettings.MetricSetting;
+            }
         }
 
         private void SendSettingsChangedMessage(string key)
@@ -127,6 +128,8 @@ namespace WhereIsMakkah.ViewModel
             Messenger.Default.Send<SettingsChangedMessage>(msg);
         }
 
+        private bool _metricSetting = true;
+
         /// <summary>
         /// Property to get and set a RadioButton Setting Key.
         /// </summary>
@@ -134,11 +137,11 @@ namespace WhereIsMakkah.ViewModel
         {
             get
             {
-                return App.AppSettings.MetricSetting;
+                return _metricSetting;
             }
             set
             {
-                App.AppSettings.MetricSetting = value;
+                _metricSetting = App.AppSettings.MetricSetting = value;
                 SendSettingsChangedMessage("Unit");
             }
         }
@@ -150,11 +153,11 @@ namespace WhereIsMakkah.ViewModel
         {
             get
             {
-                return !App.AppSettings.MetricSetting;
+                return !_metricSetting;
             }
             set
             {
-                App.AppSettings.MetricSetting = !value;
+                _metricSetting = App.AppSettings.MetricSetting = !value;
                 SendSettingsChangedMessage("Unit");
             }
         }
