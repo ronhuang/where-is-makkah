@@ -61,11 +61,56 @@ namespace WhereIsMakkah.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Where Is Makkah shows the direction to Makkah (Mecca.).
+        /// </summary>
+        public static string AboutLabel {
+            get {
+                return ResourceManager.GetString("AboutLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string AboutTitle {
+            get {
+                return ResourceManager.GetString("AboutTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copyright (c) 2011 Ron Huang. All rights reserved.  Use of this source code is governed by a BSD-style license that can be found in the LICENSE file..
         /// </summary>
         public static string AppCopyrightText {
             get {
                 return ResourceManager.GetString("AppCopyrightText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        public static string ApplicationBarRefreshLabel {
+            get {
+                return ResourceManager.GetString("ApplicationBarRefreshLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string ApplicationBarSettingsLabel {
+            get {
+                return ResourceManager.GetString("ApplicationBarSettingsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Where Is Makkah.
+        /// </summary>
+        public static string ApplicationTitle {
+            get {
+                return ResourceManager.GetString("ApplicationTitle", resourceCulture);
             }
         }
         
@@ -88,6 +133,69 @@ namespace WhereIsMakkah.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Makkah is approximately {0} {1} away..
+        /// </summary>
+        public static string DistanceLabel {
+            get {
+                return ResourceManager.GetString("DistanceLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please click the ad if you like this application..
+        /// </summary>
+        public static string DonateLabel {
+            get {
+                return ResourceManager.GetString("DonateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application does not have permission to access location..
+        /// </summary>
+        public static string FeedbackNoAccessLabel {
+            get {
+                return ResourceManager.GetString("FeedbackNoAccessLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location is not functioning on this device..
+        /// </summary>
+        public static string FeedbackNoFunctionLabel {
+            get {
+                return ResourceManager.GetString("FeedbackNoFunctionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location data is not available..
+        /// </summary>
+        public static string FeedbackNotAvailableLabel {
+            get {
+                return ResourceManager.GetString("FeedbackNotAvailableLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Large arrow is pointing toward Makkah..
+        /// </summary>
+        public static string FeedbackReadyLabel {
+            get {
+                return ResourceManager.GetString("FeedbackReadyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting location service. This could take up a while..
+        /// </summary>
+        public static string FeedbackStartingLabel {
+            get {
+                return ResourceManager.GetString("FeedbackStartingLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wikimedia Commons/Basil D Soufi.
         /// </summary>
         public static string IconCopyrightText {
@@ -106,6 +214,33 @@ namespace WhereIsMakkah.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Imperial (miles).
+        /// </summary>
+        public static string ImperialLabel {
+            get {
+                return ResourceManager.GetString("ImperialLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mile(s).
+        /// </summary>
+        public static string ImperialUnitLabel {
+            get {
+                return ResourceManager.GetString("ImperialUnitLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manually point the small arrow to north..
+        /// </summary>
+        public static string InstructionLabel {
+            get {
+                return ResourceManager.GetString("InstructionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to License.
         /// </summary>
         public static string LicenseLabel {
@@ -115,11 +250,65 @@ namespace WhereIsMakkah.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Metric (kilometers).
+        /// </summary>
+        public static string MetricLabel {
+            get {
+                return ResourceManager.GetString("MetricLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to kilometer(s).
+        /// </summary>
+        public static string MetricUnitLabel {
+            get {
+                return ResourceManager.GetString("MetricUnitLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note: since Windows Phone 7 does not support Compass API yet (will be available in 7.1,) you have to manually point the top of the phone toward north first to show the direction to Makkah..
+        /// </summary>
+        public static string NoteLabel {
+            get {
+                return ResourceManager.GetString("NoteLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string SettingsTitle {
+            get {
+                return ResourceManager.GetString("SettingsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Where Is Makkah.
         /// </summary>
         public static string TitleLabel {
             get {
                 return ResourceManager.GetString("TitleLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Units.
+        /// </summary>
+        public static string UnitLabel {
+            get {
+                return ResourceManager.GetString("UnitLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version: {0}.
+        /// </summary>
+        public static string VersionLabel {
+            get {
+                return ResourceManager.GetString("VersionLabel", resourceCulture);
             }
         }
     }

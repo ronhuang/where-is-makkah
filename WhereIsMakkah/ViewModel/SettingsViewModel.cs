@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Resources;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using WhereIsMakkah.Util;
 using WhereIsMakkah.Model;
+using WhereIsMakkah.Lang;
 
 namespace WhereIsMakkah.ViewModel
 {
@@ -20,54 +22,6 @@ namespace WhereIsMakkah.ViewModel
     /// </summary>
     public class SettingsViewModel : ViewModelBase
     {
-        public string ApplicationTitle
-        {
-            get
-            {
-                return "Where is Makkah";
-            }
-        }
-
-        public string SettingsTitle
-        {
-            get
-            {
-                return "Settings";
-            }
-        }
-
-        public string UnitLabel
-        {
-            get
-            {
-                return "Units";
-            }
-        }
-
-        public string MetricLabel
-        {
-            get
-            {
-                return "Metric (kilometers)";
-            }
-        }
-
-        public string ImperialLabel
-        {
-            get
-            {
-                return "Imperial (miles)";
-            }
-        }
-
-        public string AboutTitle
-        {
-            get
-            {
-                return "About";
-            }
-        }
-
         public string VersionLabel
         {
             get
@@ -78,31 +32,7 @@ namespace WhereIsMakkah.ViewModel
                 int endIndex = assemblyName.IndexOf(',', startIndex + 1);
                 string version = assemblyName.Substring(startIndex, endIndex - startIndex);
 
-                return string.Format("Version: {0}", version);
-            }
-        }
-
-        public string AboutLabel
-        {
-            get
-            {
-                return "Where Is Makkah shows the direction to Makkah (Mecca.)";
-            }
-        }
-
-        public string NoteLabel
-        {
-            get
-            {
-                return "Note: since Windows Phone 7 does not support Compass API yet (will be available in 7.1,) you have to manually point the top of the phone toward north first to show the direction to Makkah.";
-            }
-        }
-
-        public string DonateLabel
-        {
-            get
-            {
-                return "Please click the ad if you like this application.";
+                return string.Format(AppResources.VersionLabel, version);
             }
         }
 

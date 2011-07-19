@@ -66,14 +66,14 @@
 			Grid.Row="0"
 			Margin="24,24,0,12">
 			<TextBlock x:Name="ApplicationTitle"
-				Text="{Binding ApplicationTitle}"
+				Text="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"
 				Style="{StaticResource PhoneTextNormalStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" />
 		</StackPanel>
 		<StackPanel Margin="{StaticResource PhoneMargin}" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
 			<!--ContentPanel - place additional content here-->
 			<es:BlockArrow Height="30" Orientation="Up" Stroke="{StaticResource PhoneAccentBrush}" UseLayoutRounding="False" Width="30" StrokeThickness="{StaticResource PhoneStrokeThickness}"/>
 			<!--ContentPanel - place additional content here-->
-			<TextBlock Text="{Binding Instruction, Mode=OneWay}" Margin="{StaticResource PhoneMargin}" TextAlignment="Center"/>
+			<TextBlock Text="{Binding LocalizedResources.InstructionLabel, Source={StaticResource LocalizedStrings}}" Margin="{StaticResource PhoneMargin}" TextAlignment="Center"/>
 		</StackPanel>
 
 		<!--ContentPanel - place additional content here-->

@@ -117,8 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutLabel" xml:space="preserve">
+    <value>Where Is Makkah shows the direction to Makkah (Mecca.)</value>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>About</value>
+  </data>
   <data name="AppCopyrightText" xml:space="preserve">
     <value>Copyright (c) 2011 Ron Huang. All rights reserved.  Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.</value>
+  </data>
+  <data name="ApplicationBarRefreshLabel" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="ApplicationBarSettingsLabel" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>Where Is Makkah</value>
   </data>
   <data name="BackgroundCopyrightText" xml:space="preserve">
     <value>Wikimedia Commons/Bluemangoa2z</value>
@@ -126,17 +141,65 @@
   <data name="BackgroundLabel" xml:space="preserve">
     <value>Background</value>
   </data>
+  <data name="DistanceLabel" xml:space="preserve">
+    <value>Makkah is approximately {0} {1} away.</value>
+  </data>
+  <data name="DonateLabel" xml:space="preserve">
+    <value>Please click the ad if you like this application.</value>
+  </data>
+  <data name="FeedbackNoAccessLabel" xml:space="preserve">
+    <value>Application does not have permission to access location.</value>
+  </data>
+  <data name="FeedbackNoFunctionLabel" xml:space="preserve">
+    <value>Location is not functioning on this device.</value>
+  </data>
+  <data name="FeedbackNotAvailableLabel" xml:space="preserve">
+    <value>Location data is not available.</value>
+  </data>
+  <data name="FeedbackReadyLabel" xml:space="preserve">
+    <value>Large arrow is pointing toward Makkah.</value>
+  </data>
+  <data name="FeedbackStartingLabel" xml:space="preserve">
+    <value>Starting location service. This could take up a while.</value>
+  </data>
   <data name="IconCopyrightText" xml:space="preserve">
     <value>Wikimedia Commons/Basil D Soufi</value>
   </data>
   <data name="IconLabel" xml:space="preserve">
     <value>Icon</value>
   </data>
+  <data name="ImperialLabel" xml:space="preserve">
+    <value>Imperial (miles)</value>
+  </data>
+  <data name="ImperialUnitLabel" xml:space="preserve">
+    <value>mile(s)</value>
+  </data>
+  <data name="InstructionLabel" xml:space="preserve">
+    <value>Manually point the small arrow to north.</value>
+  </data>
   <data name="LicenseLabel" xml:space="preserve">
     <value>License</value>
     <comment>License label on the pivot item in settings page.</comment>
   </data>
+  <data name="MetricLabel" xml:space="preserve">
+    <value>Metric (kilometers)</value>
+  </data>
+  <data name="MetricUnitLabel" xml:space="preserve">
+    <value>kilometer(s)</value>
+  </data>
+  <data name="NoteLabel" xml:space="preserve">
+    <value>Note: since Windows Phone 7 does not support Compass API yet (will be available in 7.1,) you have to manually point the top of the phone toward north first to show the direction to Makkah.</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="TitleLabel" xml:space="preserve">
     <value>Where Is Makkah</value>
+  </data>
+  <data name="UnitLabel" xml:space="preserve">
+    <value>Units</value>
+  </data>
+  <data name="VersionLabel" xml:space="preserve">
+    <value>Version: {0}</value>
   </data>
 </root>

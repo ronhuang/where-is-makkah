@@ -24,26 +24,27 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <controls:Pivot Title="{Binding ApplicationTitle, Mode=OneWay}">
+        <controls:Pivot Title="{Binding LocalizedResources.TitleLabel, Source={StaticResource LocalizedStrings}}">
             <!--Pivot item one-->
-            <controls:PivotItem x:Name="Settings" Header="{Binding SettingsTitle, Mode=OneWay}">
+            <controls:PivotItem x:Name="Settings" Header="{Binding LocalizedResources.SettingsTitle, Source={StaticResource LocalizedStrings}}">
                 <Grid>
                 	<Grid.RowDefinitions>
                 		<RowDefinition Height="Auto"/>
                 		<RowDefinition Height="Auto"/>
                 		<RowDefinition Height="Auto"/>
                 	</Grid.RowDefinitions>
-                	<TextBlock Style="{StaticResource PhoneTextSmallStyle}" HorizontalAlignment="Left" Text="{Binding UnitLabel, Mode=OneWay}" d:LayoutOverrides="Height"/>
-                	<RadioButton Content="{Binding MetricLabel, Mode=OneWay}" HorizontalAlignment="Left" d:LayoutOverrides="Height" Grid.Row="1" GroupName="UnitGroup" IsChecked="{Binding MetricSetting, Mode=TwoWay}"/>
-                	<RadioButton Content="{Binding ImperialLabel, Mode=OneWay}" HorizontalAlignment="Left" d:LayoutOverrides="Height" Grid.Row="2" GroupName="UnitGroup" IsChecked="{Binding ImperialSetting, Mode=TwoWay}"/>
+                	<TextBlock Style="{StaticResource PhoneTextSmallStyle}" HorizontalAlignment="Left" Text="{Binding LocalizedResources.UnitLabel, Source={StaticResource LocalizedStrings}}" d:LayoutOverrides="Height"/>
+                	<RadioButton Content="{Binding LocalizedResources.MetricLabel, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" d:LayoutOverrides="Height" Grid.Row="1" GroupName="UnitGroup" IsChecked="{Binding MetricSetting, Mode=TwoWay}"/>
+                	<RadioButton Content="{Binding LocalizedResources.ImperialLabel, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" d:LayoutOverrides="Height" Grid.Row="2" GroupName="UnitGroup" IsChecked="{Binding ImperialSetting, Mode=TwoWay}"/>
                 </Grid>
             </controls:PivotItem>
 
             <!--Pivot item two-->
-            <controls:PivotItem x:Name="About" Header="{Binding AboutTitle, Mode=OneWay}">
+            <controls:PivotItem x:Name="About" Header="{Binding LocalizedResources.AboutTitle, Source={StaticResource LocalizedStrings}}">
                 <ScrollViewer>
             		<Grid>
             			<Grid.RowDefinitions>
+            				<RowDefinition Height="Auto"/>
             				<RowDefinition Height="Auto"/>
             				<RowDefinition Height="Auto"/>
             				<RowDefinition Height="Auto"/>
@@ -52,18 +53,19 @@
             				<RowDefinition Height="Auto"/>
             			</Grid.RowDefinitions>
             			<TextBlock Grid.Row="0" Style="{StaticResource PhoneTextLargeStyle}" HorizontalAlignment="Left"
-            				Text="{Binding AboutLabel, Mode=OneWay}" d:LayoutOverrides="Height"
+            				Text="{Binding LocalizedResources.AboutLabel, Source={StaticResource LocalizedStrings}}" d:LayoutOverrides="Height"
             				Margin="{StaticResource PhoneMargin}" TextWrapping="Wrap" />
             			<TextBlock Grid.Row="1" Style="{StaticResource PhoneTextNormalStyle}" HorizontalAlignment="Left"
             				Text="{Binding VersionLabel, Mode=OneWay}" d:LayoutOverrides="Height"
             				Margin="{StaticResource PhoneMargin}" />
-            			<TextBlock Grid.Row="2" Style="{StaticResource PhoneTextSmallStyle}" HorizontalAlignment="Left"
-            				Text="{Binding NoteLabel, Mode=OneWay}" d:LayoutOverrides="Height"
+            			<HyperlinkButton Content="http://ronhuang.org/" HorizontalAlignment="Left" Grid.Row="2" Margin="{StaticResource PhoneVerticalMargin}" NavigateUri="http://ronhuang.org/" TargetName="_blank" />
+            			<TextBlock Grid.Row="3" Style="{StaticResource PhoneTextSmallStyle}" HorizontalAlignment="Left"
+            				Text="{Binding LocalizedResources.NoteLabel, Source={StaticResource LocalizedStrings}}" d:LayoutOverrides="Height"
             				Margin="{StaticResource PhoneMargin}" TextWrapping="Wrap" />
-            			<TextBlock Grid.Row="4" Style="{StaticResource PhoneTextNormalStyle}" HorizontalAlignment="Center"
-            				Text="{Binding DonateLabel, Mode=OneWay}" d:LayoutOverrides="Height"
+            			<TextBlock Grid.Row="5" Style="{StaticResource PhoneTextNormalStyle}" HorizontalAlignment="Center"
+            				Text="{Binding LocalizedResources.DonateLabel, Source={StaticResource LocalizedStrings}}" d:LayoutOverrides="Height"
             				Margin="{StaticResource PhoneMargin}" TextWrapping="Wrap" />
-            			<my:AdControl Grid.Row="5" Height="75" HorizontalAlignment="Center" Margin="0,0,0,0" Width="300" AdUnitId="68958" ApplicationId="025565b8-9faf-4bb9-8c6a-c67e32e14a6e" />
+            			<my:AdControl Grid.Row="6" Height="75" HorizontalAlignment="Center" Margin="0,0,0,0" Width="300" AdUnitId="68958" ApplicationId="025565b8-9faf-4bb9-8c6a-c67e32e14a6e" />
             		</Grid>
             	</ScrollViewer>
             </controls:PivotItem>

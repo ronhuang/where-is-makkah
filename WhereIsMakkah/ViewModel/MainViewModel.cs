@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Threading;
 using GalaSoft.MvvmLight.Command;
 using WhereIsMakkah.Util;
 using GalaSoft.MvvmLight.Messaging;
+using WhereIsMakkah.Lang;
 
 namespace WhereIsMakkah.ViewModel
 {
@@ -24,22 +25,6 @@ namespace WhereIsMakkah.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        public string ApplicationTitle
-        {
-            get
-            {
-                return "Where Is Makkah";
-            }
-        }
-
-        public string Instruction
-        {
-            get
-            {
-                return "Manually point the small arrow to north.";
-            }
-        }
-
         /// <summary>
         /// The <see cref="CurrentRotationZ" /> property's name.
         /// </summary>
@@ -191,9 +176,9 @@ namespace WhereIsMakkah.ViewModel
         {
             get
             {
-                return string.Format("Makkah is approximately {0} {1} away.",
-                    Distance.ToString("0"),
-                    MetricSetting ? "kilometer(s)" : "mile(s)");
+                var unit = MetricSetting ? AppResources.MetricUnitLabel : AppResources.ImperialUnitLabel;
+
+                return string.Format(AppResources.DistanceLabel, Distance.ToString("0"), unit);
             }
         }
 
@@ -289,7 +274,7 @@ namespace WhereIsMakkah.ViewModel
                 return;
             }
 
-            Feedback = "Starting location service. This could take up a while.";
+            Feedback = AppResources.FeedbackStartingLabel;
 
             Busy = true;
             var msg = new AnimateArrowMessage() { Run = true, Indeterminate = true };
@@ -304,11 +289,11 @@ namespace WhereIsMakkah.ViewModel
                 case GeoPositionStatus.Disabled:
                     if (_watcher.Permission == GeoPositionPermission.Denied)
                     {
-                        Feedback = "Application does not have permission to access location.";
+                        Feedback = AppResources.FeedbackNoAccessLabel;
                     }
                     else
                     {
-                        Feedback = "Location is not functioning on this device";
+                        Feedback = AppResources.FeedbackNoFunctionLabel;
                     }
 
                     StopSensor();
@@ -319,7 +304,7 @@ namespace WhereIsMakkah.ViewModel
                     break;
 
                 case GeoPositionStatus.NoData:
-                    Feedback = "Location data is not available.";
+                    Feedback = AppResources.FeedbackNotAvailableLabel;
 
                     StopSensor();
                     break;
@@ -327,7 +312,7 @@ namespace WhereIsMakkah.ViewModel
                 case GeoPositionStatus.Ready:
                     GeoCoordinate loc = _watcher.Position.Location;
 
-                    Feedback = "Large arrow is pointing toward Makkah.";
+                    Feedback = AppResources.FeedbackReadyLabel;
                     Distance = GeoDistanceCalculator.DistanceInKilometers(loc.Latitude, loc.Longitude, Makkah.Latitude, Makkah.Longitude);
 
                     var destZ = 360.0 - GeoDistanceCalculator.InitialBearing(loc.Latitude, loc.Longitude, Makkah.Latitude, Makkah.Longitude); // counter-clockwise
