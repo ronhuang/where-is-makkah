@@ -67,6 +67,16 @@
             		</Grid>
             	</ScrollViewer>
             </controls:PivotItem>
+            <controls:PivotItem x:Name="License" Header="{Binding Path=LocalizedResources.LicenseLabel, Source={StaticResource LocalizedStrings}}">
+            	<StackPanel d:LayoutOverrides="Width, Height">
+            		<TextBlock Text="{Binding LocalizedResources.TitleLabel, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" TextWrapping="Wrap" />
+            		<TextBlock Text="{Binding LocalizedResources.AppCopyrightText, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" Margin="{StaticResource PhoneMargin}" />
+            		<TextBlock Text="{Binding LocalizedResources.IconLabel, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" TextWrapping="Wrap" />
+            		<TextBlock Text="{Binding LocalizedResources.IconCopyrightText, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" Margin="{StaticResource PhoneMargin}" />
+            		<TextBlock Text="{Binding LocalizedResources.BackgroundLabel, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" TextWrapping="Wrap" />
+            		<TextBlock Text="{Binding LocalizedResources.BackgroundCopyrightText, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" Margin="{StaticResource PhoneMargin}" />
+            	</StackPanel>
+            </controls:PivotItem>
         </controls:Pivot>
     </Grid>
     

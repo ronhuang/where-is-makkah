@@ -12,6 +12,8 @@
     <Application.Resources>
         <vm:ViewModelLocator x:Key="Locator"
                              d:IsDataSource="True" />
+        <local:LocalizedStrings x:Key="LocalizedStrings"
+                                xmlns:local ="clr-namespace:WhereIsMakkah.Lang" />
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>
