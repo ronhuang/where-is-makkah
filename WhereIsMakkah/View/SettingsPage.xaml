@@ -26,7 +26,7 @@
         <!--Pivot Control-->
         <controls:Pivot Title="{Binding ApplicationTitle, Mode=OneWay}">
             <!--Pivot item one-->
-            <controls:PivotItem Header="{Binding SettingsTitle, Mode=OneWay}">
+            <controls:PivotItem x:Name="Settings" Header="{Binding SettingsTitle, Mode=OneWay}">
                 <Grid>
                 	<Grid.RowDefinitions>
                 		<RowDefinition Height="Auto"/>
@@ -40,7 +40,7 @@
             </controls:PivotItem>
 
             <!--Pivot item two-->
-            <controls:PivotItem Header="{Binding AboutTitle, Mode=OneWay}">
+            <controls:PivotItem x:Name="About" Header="{Binding AboutTitle, Mode=OneWay}">
                 <Grid>
                 	<Grid.RowDefinitions>
                 		<RowDefinition Height="Auto"/>
