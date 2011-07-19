@@ -16,7 +16,7 @@
     Orientation="Portrait"
     mc:Ignorable="d"
     d:DesignWidth="480"
-    d:DesignHeight="768"
+    d:DesignHeight="696"
     shell:SystemTray.IsVisible="True"
     DataContext="{Binding Main, Source={StaticResource Locator}}">
 	
