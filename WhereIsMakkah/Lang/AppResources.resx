@@ -124,7 +124,7 @@
     <value>About</value>
   </data>
   <data name="AppCopyrightText" xml:space="preserve">
-    <value>Copyright (c) 2011 Ron Huang. All rights reserved.  Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.</value>
+    <value>Copyright © 2011 Ron Huang. All rights reserved.  Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.</value>
   </data>
   <data name="ApplicationBarRefreshLabel" xml:space="preserve">
     <value>Refresh</value>

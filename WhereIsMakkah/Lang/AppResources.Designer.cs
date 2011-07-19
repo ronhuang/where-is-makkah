@@ -79,7 +79,7 @@ namespace WhereIsMakkah.Lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copyright (c) 2011 Ron Huang. All rights reserved.  Use of this source code is governed by a BSD-style license that can be found in the LICENSE file..
+        ///   Looks up a localized string similar to Copyright © 2011 Ron Huang. All rights reserved.  Use of this source code is governed by a BSD-style license that can be found in the LICENSE file..
         /// </summary>
         public static string AppCopyrightText {
             get {
