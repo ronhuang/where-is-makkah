@@ -12,7 +12,7 @@
     d:DesignHeight="768"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:GalaSoft_MvvmLight_Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71"
-    xmlns:google="clr-namespace:Google.AdMob.Ads.WindowsPhone7.WPF;assembly=Google.AdMob.Ads.WindowsPhone7"
+    xmlns:my="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -62,7 +62,7 @@
                 	<TextBlock Grid.Row="4" Style="{StaticResource PhoneTextNormalStyle}" HorizontalAlignment="Left"
 						Text="{Binding DonateLabel, Mode=OneWay}" d:LayoutOverrides="Height"
 						Margin="{StaticResource PhoneMargin}" TextWrapping="Wrap" />
-                	<google:BannerAd Grid.Row="5" Margin="12,0,12,0" AdUnitID="a14e245ad6bc9a4"  />
+                	<my:AdControl Grid.Row="5" Height="80" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="480" AdUnitId="68957" ApplicationId="025565b8-9faf-4bb9-8c6a-c67e32e14a6e" />
                 </Grid>
             </controls:PivotItem>
         </controls:Pivot>
