@@ -16,7 +16,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait"
+    SupportedOrientations="PortraitOrLandscape"
     Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
     DataContext="{Binding Settings, Source={StaticResource Locator}}">
@@ -41,29 +41,31 @@
 
             <!--Pivot item two-->
             <controls:PivotItem x:Name="About" Header="{Binding AboutTitle, Mode=OneWay}">
-                <Grid>
-                	<Grid.RowDefinitions>
-                		<RowDefinition Height="Auto"/>
-                		<RowDefinition Height="Auto"/>
-                		<RowDefinition Height="Auto"/>
-                		<RowDefinition/>
-                		<RowDefinition Height="Auto"/>
-                		<RowDefinition Height="Auto"/>
-                	</Grid.RowDefinitions>
-                	<TextBlock Grid.Row="0" Style="{StaticResource PhoneTextLargeStyle}" HorizontalAlignment="Left"
-						Text="{Binding AboutLabel, Mode=OneWay}" d:LayoutOverrides="Height"
-						Margin="{StaticResource PhoneMargin}" TextWrapping="Wrap" />
-                	<TextBlock Grid.Row="1" Style="{StaticResource PhoneTextNormalStyle}" HorizontalAlignment="Left"
-						Text="{Binding VersionLabel, Mode=OneWay}" d:LayoutOverrides="Height"
-						Margin="{StaticResource PhoneMargin}" />
-                	<TextBlock Grid.Row="2" Style="{StaticResource PhoneTextSmallStyle}" HorizontalAlignment="Left"
-						Text="{Binding NoteLabel, Mode=OneWay}" d:LayoutOverrides="Height"
-						Margin="{StaticResource PhoneMargin}" TextWrapping="Wrap" />
-                	<TextBlock Grid.Row="4" Style="{StaticResource PhoneTextNormalStyle}" HorizontalAlignment="Center"
-						Text="{Binding DonateLabel, Mode=OneWay}" d:LayoutOverrides="Height"
-						Margin="{StaticResource PhoneMargin}" TextWrapping="Wrap" />
-                	<my:AdControl Grid.Row="5" Height="75" HorizontalAlignment="Center" Margin="0,0,0,0" Width="300" AdUnitId="68958" ApplicationId="025565b8-9faf-4bb9-8c6a-c67e32e14a6e" />
-                </Grid>
+                <ScrollViewer>
+            		<Grid>
+            			<Grid.RowDefinitions>
+            				<RowDefinition Height="Auto"/>
+            				<RowDefinition Height="Auto"/>
+            				<RowDefinition Height="Auto"/>
+            				<RowDefinition/>
+            				<RowDefinition Height="Auto"/>
+            				<RowDefinition Height="Auto"/>
+            			</Grid.RowDefinitions>
+            			<TextBlock Grid.Row="0" Style="{StaticResource PhoneTextLargeStyle}" HorizontalAlignment="Left"
+            				Text="{Binding AboutLabel, Mode=OneWay}" d:LayoutOverrides="Height"
+            				Margin="{StaticResource PhoneMargin}" TextWrapping="Wrap" />
+            			<TextBlock Grid.Row="1" Style="{StaticResource PhoneTextNormalStyle}" HorizontalAlignment="Left"
+            				Text="{Binding VersionLabel, Mode=OneWay}" d:LayoutOverrides="Height"
+            				Margin="{StaticResource PhoneMargin}" />
+            			<TextBlock Grid.Row="2" Style="{StaticResource PhoneTextSmallStyle}" HorizontalAlignment="Left"
+            				Text="{Binding NoteLabel, Mode=OneWay}" d:LayoutOverrides="Height"
+            				Margin="{StaticResource PhoneMargin}" TextWrapping="Wrap" />
+            			<TextBlock Grid.Row="4" Style="{StaticResource PhoneTextNormalStyle}" HorizontalAlignment="Center"
+            				Text="{Binding DonateLabel, Mode=OneWay}" d:LayoutOverrides="Height"
+            				Margin="{StaticResource PhoneMargin}" TextWrapping="Wrap" />
+            			<my:AdControl Grid.Row="5" Height="75" HorizontalAlignment="Center" Margin="0,0,0,0" Width="300" AdUnitId="68958" ApplicationId="025565b8-9faf-4bb9-8c6a-c67e32e14a6e" />
+            		</Grid>
+            	</ScrollViewer>
             </controls:PivotItem>
         </controls:Pivot>
     </Grid>
