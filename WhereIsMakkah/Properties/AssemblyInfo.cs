@@ -7,7 +7,7 @@ using System.Resources;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Where Is Makkah")]
-[assembly: AssemblyDescription("Give direction to Makkah")]
+[assembly: AssemblyDescription("Gives direction to Makkah")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ron Huang")]
 [assembly: AssemblyProduct("Where Is Makkah")]
