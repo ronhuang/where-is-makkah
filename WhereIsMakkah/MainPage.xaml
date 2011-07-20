@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:GalaSoft_MvvmLight_Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP7"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -86,6 +87,7 @@
 		</Polygon>
 		<TextBlock Text="{Binding Feedback, Mode=OneWay}" Margin="{StaticResource PhoneMargin}" d:LayoutOverrides="Width" Grid.Row="3" HorizontalAlignment="Center"/>
 		<TextBlock Text="{Binding DistanceLabel, Mode=OneWay}" Margin="{StaticResource PhoneMargin}" d:LayoutOverrides="Width" Grid.Row="4" HorizontalAlignment="Center"/>
+		<toolkit:PerformanceProgressBar VerticalAlignment="Top" IsIndeterminate="{Binding Busy, Mode=OneWay}" />
 	</Grid>
 
 
