@@ -6,9 +6,8 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:es="clr-namespace:Microsoft.Expression.Shapes;assembly=Microsoft.Expression.Drawing"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-    xmlns:GalaSoft_MvvmLight_Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71"
+    xmlns:GalaSoft_MvvmLight_Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP7"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -19,7 +18,7 @@
     d:DesignHeight="696"
     shell:SystemTray.IsVisible="True"
     DataContext="{Binding Main, Source={StaticResource Locator}}">
-	
+
 	<phone:PhoneApplicationPage.Resources>
 		<Storyboard x:Name="IndeterminateArrow" RepeatBehavior="Forever">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationZ)" Storyboard.TargetName="DirectionArrow">
@@ -50,7 +49,7 @@
 			<shell:ApplicationBarIconButton Click="SettingsClicked" IconUri="/Icon/appbar.feature.settings.rest.png" IsEnabled="True" Text="Settings"/>
 		</shell:ApplicationBar>
 	</phone:PhoneApplicationPage.ApplicationBar>
-    
+
 	<Grid x:Name="LayoutRoot"
 		Background="Transparent">
 		<Grid.RowDefinitions>
@@ -70,18 +69,21 @@
 				Style="{StaticResource PhoneTextNormalStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" />
 		</StackPanel>
 		<StackPanel Margin="{StaticResource PhoneMargin}" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-			<!--ContentPanel - place additional content here-->
-			<es:BlockArrow Height="30" Orientation="Up" Stroke="{StaticResource PhoneAccentBrush}" UseLayoutRounding="False" Width="30" StrokeThickness="{StaticResource PhoneStrokeThickness}"/>
-			<!--ContentPanel - place additional content here-->
+			<Polygon Points="3,15,15,2,27,15,21,15,21,29,9,29,9,15" Width="30" Height="30" Stroke="{StaticResource PhoneAccentBrush}" StrokeThickness="{StaticResource PhoneStrokeThickness}" />
 			<TextBlock Text="{Binding LocalizedResources.InstructionLabel, Source={StaticResource LocalizedStrings}}" Margin="{StaticResource PhoneMargin}" TextAlignment="Center"/>
 		</StackPanel>
 
 		<!--ContentPanel - place additional content here-->
-		<es:BlockArrow x:Name="DirectionArrow" Fill="{StaticResource PhoneAccentBrush}" Orientation="Up" UseLayoutRounding="False" Width="200" Grid.Row="2" Height="250">
-			<es:BlockArrow.Projection>
-				<PlaneProjection RotationX="0" RotationY="0" RotationZ="{Binding CurrentRotationZ}"/>
-			</es:BlockArrow.Projection>
-		</es:BlockArrow>
+		<Polygon x:Name="DirectionArrow"
+			Points="0,125,100,0,200,125,150,125,150,250,50,250,50,125"
+			Width="200" Height="250"
+			Fill="{StaticResource PhoneAccentBrush}" Grid.Row="2"
+			xmlns:local="clr-namespace:WhereIsMakkah.Util"
+			local:RotationZBindingHelper.RotationZ="{Binding CurrentRotationZ}">
+			<Polygon.Projection>
+				<PlaneProjection RotationX="0" RotationY="0" RotationZ="0"/>
+			</Polygon.Projection>
+		</Polygon>
 		<TextBlock Text="{Binding Feedback, Mode=OneWay}" Margin="{StaticResource PhoneMargin}" d:LayoutOverrides="Width" Grid.Row="3" HorizontalAlignment="Center"/>
 		<TextBlock Text="{Binding DistanceLabel, Mode=OneWay}" Margin="{StaticResource PhoneMargin}" d:LayoutOverrides="Width" Grid.Row="4" HorizontalAlignment="Center"/>
 	</Grid>
