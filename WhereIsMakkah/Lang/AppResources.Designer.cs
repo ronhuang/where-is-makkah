@@ -151,7 +151,7 @@ namespace WhereIsMakkah.Lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Application does not have permission to access location..
+        ///   Looks up a localized string similar to Application does not have permission to access location service..
         /// </summary>
         public static string FeedbackNoAccessLabel {
             get {
@@ -160,7 +160,7 @@ namespace WhereIsMakkah.Lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Location is not functioning on this device..
+        ///   Looks up a localized string similar to Location service is not functioning on this device..
         /// </summary>
         public static string FeedbackNoFunctionLabel {
             get {
@@ -187,7 +187,7 @@ namespace WhereIsMakkah.Lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Starting location service. This could take up a while..
+        ///   Looks up a localized string similar to Starting location service. This may take a while..
         /// </summary>
         public static string FeedbackStartingLabel {
             get {
