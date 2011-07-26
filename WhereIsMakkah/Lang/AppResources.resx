@@ -181,6 +181,12 @@
     <value>License</value>
     <comment>License label on the pivot item in settings page.</comment>
   </data>
+  <data name="LocationServiceDisclosureLabel" xml:space="preserve">
+    <value>Application requires location service to determine your current position. We do not store your position.</value>
+  </data>
+  <data name="LocationServiceLabel" xml:space="preserve">
+    <value>Location Service</value>
+  </data>
   <data name="MetricLabel" xml:space="preserve">
     <value>Metric (kilometers)</value>
   </data>

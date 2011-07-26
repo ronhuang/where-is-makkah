@@ -85,8 +85,8 @@
 				<PlaneProjection RotationX="0" RotationY="0" RotationZ="0"/>
 			</Polygon.Projection>
 		</Polygon>
-		<TextBlock Text="{Binding Feedback, Mode=OneWay}" Margin="{StaticResource PhoneMargin}" d:LayoutOverrides="Width" Grid.Row="3" HorizontalAlignment="Center"/>
-		<TextBlock Text="{Binding DistanceLabel, Mode=OneWay}" Margin="{StaticResource PhoneMargin}" d:LayoutOverrides="Width" Grid.Row="4" HorizontalAlignment="Center"/>
+		<TextBlock TextWrapping="Wrap" Text="{Binding Feedback, Mode=OneWay}" Margin="{StaticResource PhoneMargin}" d:LayoutOverrides="Width" Grid.Row="3" HorizontalAlignment="Center"/>
+		<TextBlock TextWrapping="Wrap" Text="{Binding DistanceLabel, Mode=OneWay}" Margin="{StaticResource PhoneMargin}" d:LayoutOverrides="Width" Grid.Row="4" HorizontalAlignment="Center"/>
 		<toolkit:PerformanceProgressBar VerticalAlignment="Top" IsIndeterminate="{Binding Busy, Mode=OneWay}" />
 	</Grid>
 

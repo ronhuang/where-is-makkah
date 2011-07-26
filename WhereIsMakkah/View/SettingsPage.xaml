@@ -13,6 +13,7 @@
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:GalaSoft_MvvmLight_Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71"
     xmlns:my="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -27,16 +28,15 @@
         <controls:Pivot Title="{Binding LocalizedResources.TitleLabel, Source={StaticResource LocalizedStrings}}">
             <!--Pivot item one-->
             <controls:PivotItem x:Name="Settings" Header="{Binding LocalizedResources.SettingsTitle, Source={StaticResource LocalizedStrings}}">
-                <Grid>
-                	<Grid.RowDefinitions>
-                		<RowDefinition Height="Auto"/>
-                		<RowDefinition Height="Auto"/>
-                		<RowDefinition Height="Auto"/>
-                	</Grid.RowDefinitions>
-                	<TextBlock Style="{StaticResource PhoneTextSmallStyle}" HorizontalAlignment="Left" Text="{Binding LocalizedResources.UnitLabel, Source={StaticResource LocalizedStrings}}" d:LayoutOverrides="Height"/>
-                	<RadioButton Content="{Binding LocalizedResources.MetricLabel, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" d:LayoutOverrides="Height" Grid.Row="1" GroupName="UnitGroup" IsChecked="{Binding MetricSetting, Mode=TwoWay}"/>
-                	<RadioButton Content="{Binding LocalizedResources.ImperialLabel, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" d:LayoutOverrides="Height" Grid.Row="2" GroupName="UnitGroup" IsChecked="{Binding ImperialSetting, Mode=TwoWay}"/>
-                </Grid>
+            	<ScrollViewer>
+            		<StackPanel>
+            			<TextBlock Style="{StaticResource PhoneTextSmallStyle}" HorizontalAlignment="Left" Text="{Binding LocalizedResources.UnitLabel, Source={StaticResource LocalizedStrings}}" Margin="12,0,0,0"/>
+            			<RadioButton Content="{Binding LocalizedResources.MetricLabel, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" GroupName="UnitGroup" IsChecked="{Binding MetricSetting, Mode=TwoWay}"/>
+            			<RadioButton Content="{Binding LocalizedResources.ImperialLabel, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" GroupName="UnitGroup" IsChecked="{Binding ImperialSetting, Mode=TwoWay}"/>
+            			<toolkit:ToggleSwitch Header="{Binding LocalizedResources.LocationServiceLabel, Source={StaticResource LocalizedStrings}}" Margin="0,12,0,0" IsChecked="{Binding LocationServiceSetting, Mode=TwoWay}"/>
+            			<TextBlock TextWrapping="Wrap" Text="{Binding LocalizedResources.LocationServiceDisclosureLabel, Source={StaticResource LocalizedStrings}}" Margin="24,-24,24,0"/>
+            		</StackPanel>
+            	</ScrollViewer>
             </controls:PivotItem>
 
             <!--Pivot item two-->

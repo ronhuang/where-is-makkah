@@ -16,6 +16,12 @@ namespace WhereIsMakkah.Model
         // The default value of our settings
         const bool MetricSettingDefault = true;
 
+        // The isolated storage key names of our settings
+        const string LocationServiceSettingKeyName = "LocationServiceSetting";
+
+        // The default value of our settings
+        const bool LocationServiceSettingDefault = true;
+
         /// <summary>
         /// Initializes a new instance of the SettingsViewModel class.
         /// </summary>
@@ -99,7 +105,7 @@ namespace WhereIsMakkah.Model
         }
 
         /// <summary>
-        /// Property to get and set a RadioButton Setting Key.
+        /// Property to get and set metric setting.
         /// </summary>
         public bool MetricSetting
         {
@@ -110,6 +116,23 @@ namespace WhereIsMakkah.Model
             set
             {
                 AddOrUpdateValue(MetricSettingKeyName, value);
+                Save();
+            }
+        }
+
+
+        /// <summary>
+        /// Property to get and set location service setting.
+        /// </summary>
+        public bool LocationServiceSetting
+        {
+            get
+            {
+                return GetValueOrDefault<bool>(LocationServiceSettingKeyName, LocationServiceSettingDefault);
+            }
+            set
+            {
+                AddOrUpdateValue(LocationServiceSettingKeyName, value);
                 Save();
             }
         }

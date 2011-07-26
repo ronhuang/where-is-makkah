@@ -250,6 +250,24 @@ namespace WhereIsMakkah.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Application requires location service to determine your current position. We do not store your position..
+        /// </summary>
+        public static string LocationServiceDisclosureLabel {
+            get {
+                return ResourceManager.GetString("LocationServiceDisclosureLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location Service.
+        /// </summary>
+        public static string LocationServiceLabel {
+            get {
+                return ResourceManager.GetString("LocationServiceLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Metric (kilometers).
         /// </summary>
         public static string MetricLabel {

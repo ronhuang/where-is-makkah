@@ -77,7 +77,14 @@ namespace WhereIsMakkah.ViewModel
         {
             get
             {
-                return _feedback;
+                if (LocationServiceSetting)
+                {
+                    return _feedback;
+                }
+                else
+                {
+                    return AppResources.FeedbackNoAccessLabel;
+                }
             }
 
             set
@@ -130,7 +137,7 @@ namespace WhereIsMakkah.ViewModel
         /// </summary>
         public const string DistancePropertyName = "Distance";
 
-        private double _distance = 0.0;
+        private double _distance = -1.0;
 
         /// <summary>
         /// Gets the Distance property.
@@ -176,9 +183,16 @@ namespace WhereIsMakkah.ViewModel
         {
             get
             {
-                var unit = MetricSetting ? AppResources.MetricUnitLabel : AppResources.ImperialUnitLabel;
+                if (LocationServiceSetting && Distance >= 0.0)
+                {
+                    var unit = MetricSetting ? AppResources.MetricUnitLabel : AppResources.ImperialUnitLabel;
 
-                return string.Format(AppResources.DistanceLabel, Distance.ToString("0"), unit);
+                    return string.Format(AppResources.DistanceLabel, Distance.ToString("0"), unit);
+                }
+                else
+                {
+                    return "";
+                }
             }
         }
 
@@ -217,6 +231,42 @@ namespace WhereIsMakkah.ViewModel
             }
         }
 
+        /// <summary>
+        /// The <see cref="LocationServiceSetting" /> property's name.
+        /// </summary>
+        public const string LocationServiceSettingPropertyName = "LocationServiceSetting";
+
+        private bool _locationServiceSetting = true;
+
+        /// <summary>
+        /// Gets the LocationServiceSetting property.
+        /// TODO Update documentation:
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// This property's value is broadcasted by the Messenger's default instance when it changes.
+        /// </summary>
+        public bool LocationServiceSetting
+        {
+            get
+            {
+                return _locationServiceSetting;
+            }
+
+            set
+            {
+                if (_locationServiceSetting == value)
+                {
+                    return;
+                }
+
+                var oldValue = _locationServiceSetting;
+                _locationServiceSetting = value;
+
+                // Update bindings, no broadcast
+                RaisePropertyChanged(DistanceLabelPropertyName);
+                RaisePropertyChanged(FeedbackPropertyName);
+            }
+        }
+
         public RelayCommand SensorStartCommand
         {
             get;
@@ -248,6 +298,7 @@ namespace WhereIsMakkah.ViewModel
             {
                 // Code runs "for real"
                 _metricSetting = App.AppSettings.MetricSetting;
+                _locationServiceSetting = App.AppSettings.LocationServiceSetting;
             }
 
             SensorStartCommand = new RelayCommand(() => StartSensor());
@@ -262,6 +313,11 @@ namespace WhereIsMakkah.ViewModel
 
         private void StartSensor()
         {
+            if (!LocationServiceSetting)
+            {
+                return;
+            }
+
             if (_watcher == null)
             {
                 _watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default);
@@ -350,6 +406,10 @@ namespace WhereIsMakkah.ViewModel
             if (key.Equals("Unit"))
             {
                 MetricSetting = App.AppSettings.MetricSetting;
+            }
+            if (key.Equals("LocationService"))
+            {
+                LocationServiceSetting = App.AppSettings.LocationServiceSetting;
             }
         }
 

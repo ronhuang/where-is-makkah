@@ -49,6 +49,7 @@ namespace WhereIsMakkah.ViewModel
             {
                 // Code runs "for real": Connect to service, etc...
                 _metricSetting = App.AppSettings.MetricSetting;
+                _locationServiceSetting = App.AppSettings.LocationServiceSetting;
             }
         }
 
@@ -59,9 +60,10 @@ namespace WhereIsMakkah.ViewModel
         }
 
         private bool _metricSetting = true;
+        private bool _locationServiceSetting = true;
 
         /// <summary>
-        /// Property to get and set a RadioButton Setting Key.
+        /// Property to get and set metric setting.
         /// </summary>
         public bool MetricSetting
         {
@@ -89,6 +91,22 @@ namespace WhereIsMakkah.ViewModel
             {
                 _metricSetting = App.AppSettings.MetricSetting = !value;
                 SendSettingsChangedMessage("Unit");
+            }
+        }
+
+        /// <summary>
+        /// Property to get and set location service setting.
+        /// </summary>
+        public bool LocationServiceSetting
+        {
+            get
+            {
+                return _locationServiceSetting;
+            }
+            set
+            {
+                _locationServiceSetting = App.AppSettings.LocationServiceSetting = value;
+                SendSettingsChangedMessage("LocationService");
             }
         }
 
