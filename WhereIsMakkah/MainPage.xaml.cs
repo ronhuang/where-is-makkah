@@ -21,6 +21,21 @@ namespace WhereIsMakkah
 
             this.Loaded += (sender, e) =>
                 {
+                    var progressIndicator = SystemTray.ProgressIndicator;
+                    if (progressIndicator != null)
+                    {
+                        return;
+                    }
+
+                    progressIndicator = new ProgressIndicator();
+                    progressIndicator.IsIndeterminate = true;
+
+                    SystemTray.SetProgressIndicator(this, progressIndicator);
+
+                    // Bind progress indicator to Busy property
+                    var binding = new Binding("Busy") { Source = this.LayoutRoot.DataContext };
+                    BindingOperations.SetBinding(progressIndicator, ProgressIndicator.IsVisibleProperty, binding);
+
                     // Localize the text on application bar.
                     if (ApplicationBar != null)
                     {
@@ -29,6 +44,20 @@ namespace WhereIsMakkah
                         var settings = ApplicationBar.Buttons[1] as ApplicationBarIconButton;
                         settings.Text = AppResources.ApplicationBarSettingsLabel;
                     }
+                };
+
+            this.Unloaded += (sender, e) =>
+                {
+                    var progressIndicator = SystemTray.ProgressIndicator;
+                    if (progressIndicator == null)
+                    {
+                        return;
+                    }
+
+                    SystemTray.SetProgressIndicator(this, null);
+
+                    // Unbind progress indicator to Busy property
+                    BindingOperations.SetBinding(progressIndicator, ProgressIndicator.IsVisibleProperty, null);
                 };
 
             Messenger.Default.Register<AnimateArrowMessage>(this, (msg) => ReceiveMessage(msg));

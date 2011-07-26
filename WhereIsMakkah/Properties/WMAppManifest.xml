@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.0">
+<Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
   <App xmlns="" ProductID="{ac5b5d62-573c-4134-b290-0ad4f678ad7f}" Title="Where Is Makkah" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="WhereIsMakkah author" Description="Sample description" Publisher="WhereIsMakkah publisher">
     <IconPath IsRelative="true" IsResource="false">Artwork\small-mobile-app-tile.png</IconPath>
     <Capabilities>
@@ -14,6 +14,9 @@
       <Capability Name="ID_CAP_PUSH_NOTIFICATION" />
       <Capability Name="ID_CAP_SENSORS" />
       <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
+      <Capability Name="ID_CAP_ISV_CAMERA" />
+      <Capability Name="ID_CAP_CONTACTS" />
+      <Capability Name="ID_CAP_APPOINTMENTS" />
     </Capabilities>
     <Tasks>
       <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
