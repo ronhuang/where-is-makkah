@@ -2,7 +2,7 @@ syntax: glob
 #-- Files
 *.bak.*
 *.bak
-thumbs.db
+Thumbs.db
 
 #-- Directories
 App_Data/*
@@ -11,6 +11,7 @@ obj/
 Bin/
 _ReSharper.*/
 tmp/
+packages/
 
 #-- Microsoft Visual Studio specific
 *.user
