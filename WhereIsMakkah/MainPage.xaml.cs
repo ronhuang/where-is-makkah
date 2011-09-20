@@ -30,7 +30,7 @@ namespace WhereIsMakkah
 
                     SystemTray.SetProgressIndicator(this, progressIndicator);
 
-                    // Bind progress indicator to Busy property
+                    // Bind progress indicator to LocationDetermined property
                     var binding = new Binding("LocationDetermined") { Source = this.LayoutRoot.DataContext, Converter = new InverseBooleanConverter() };
                     BindingOperations.SetBinding(progressIndicator, ProgressIndicator.IsVisibleProperty, binding);
 
