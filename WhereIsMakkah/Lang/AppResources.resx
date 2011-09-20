@@ -147,6 +147,12 @@
   <data name="DonateLabel" xml:space="preserve">
     <value>Please click the ad if you like this application.</value>
   </data>
+  <data name="FeedbackMotionNotSupportedLabel" xml:space="preserve">
+    <value>Motion is not supported on this device.</value>
+  </data>
+  <data name="FeedbackMotionUnableToStartLabel" xml:space="preserve">
+    <value>Motion is unable to start.</value>
+  </data>
   <data name="FeedbackNoAccessLabel" xml:space="preserve">
     <value>Application does not have permission to access location service.</value>
   </data>

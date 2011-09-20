@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Windows;
 using System.Device.Location;
+using System.Windows.Threading;
+using Microsoft.Devices.Sensors;
+using Microsoft.Xna.Framework;
 using Microsoft.Phone.Shell;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Threading;
 using GalaSoft.MvvmLight.Command;
-using WhereIsMakkah.Util;
 using GalaSoft.MvvmLight.Messaging;
+using WhereIsMakkah.Util;
 using WhereIsMakkah.Lang;
 
 namespace WhereIsMakkah.ViewModel
@@ -310,8 +313,21 @@ namespace WhereIsMakkah.ViewModel
 
         private static readonly GeoCoordinate Makkah = new GeoCoordinate(21.4166666666666667, 39.8166666666666667);
         private GeoCoordinateWatcher _watcher;
+        private Motion _motion;
 
         private void StartSensor()
+        {
+            StartLocationSensor();
+            StartMotionSensor();
+        }
+
+        private void StopSensor()
+        {
+            StopLocationSensor();
+            StopMotionSensor();
+        }
+
+        private void StartLocationSensor()
         {
             if (!LocationServiceSetting)
             {
@@ -352,7 +368,7 @@ namespace WhereIsMakkah.ViewModel
                         Feedback = AppResources.FeedbackNoFunctionLabel;
                     }
 
-                    StopSensor();
+                    StopLocationSensor();
                     break;
 
                 case GeoPositionStatus.Initializing:
@@ -362,7 +378,7 @@ namespace WhereIsMakkah.ViewModel
                 case GeoPositionStatus.NoData:
                     Feedback = AppResources.FeedbackNotAvailableLabel;
 
-                    StopSensor();
+                    StopLocationSensor();
                     break;
 
                 case GeoPositionStatus.Ready:
@@ -373,14 +389,14 @@ namespace WhereIsMakkah.ViewModel
 
                     var destZ = 360.0 - GeoDistanceCalculator.InitialBearing(loc.Latitude, loc.Longitude, Makkah.Latitude, Makkah.Longitude); // counter-clockwise
 
-                    StopSensor();
+                    StopLocationSensor();
                     var msg = new AnimateArrowMessage() { Run = true, Indeterminate = false, DestinationZ = destZ };
                     Messenger.Default.Send<AnimateArrowMessage>(msg);
                     break;
             }
         }
 
-        private void StopSensor()
+        private void StopLocationSensor()
         {
             if (_watcher == null)
             {
@@ -391,6 +407,58 @@ namespace WhereIsMakkah.ViewModel
             var msg = new AnimateArrowMessage() { Run = false };
             Messenger.Default.Send<AnimateArrowMessage>(msg);
             _watcher.Stop();
+        }
+
+        private void StartMotionSensor()
+        {
+            // Check to see whether the Motion API is supported on the device.
+            if (!Motion.IsSupported)
+            {
+                Feedback = AppResources.FeedbackMotionNotSupportedLabel;
+                return;
+            }
+
+            // If the Motion object is null, initialize it and add a CurrentValueChanged
+            // event handler.
+            if (_motion == null)
+            {
+                _motion = new Motion();
+                _motion.TimeBetweenUpdates = TimeSpan.FromMilliseconds(20);
+                _motion.CurrentValueChanged += new EventHandler<SensorReadingEventArgs<MotionReading>>(_motion_CurrentValueChanged);
+            }
+
+            // Try to start the Motion API.
+            try
+            {
+                _motion.Start();
+            }
+            catch (Exception ex)
+            {
+                Feedback = AppResources.FeedbackMotionUnableToStartLabel;
+            }
+        }
+
+        private void _motion_CurrentValueChanged(object sender, SensorReadingEventArgs<MotionReading> e)
+        {
+            // This event arrives on a background thread. Use BeginInvoke to call
+            // CurrentValueChanged on the UI thread.
+            DispatcherHelper.CheckBeginInvokeOnUI(() => CurrentValueChanged(e.SensorReading));
+        }
+
+        private void CurrentValueChanged(MotionReading e)
+        {
+            AttitudeReading ar = e.Attitude;
+            Feedback = String.Format("Pitch: {0}, Yaw: {1}, Roll: {2}", ar.Pitch, ar.Yaw, ar.Roll);
+        }
+
+        private void StopMotionSensor()
+        {
+            if (_motion == null)
+            {
+                return;
+            }
+
+            _motion.Stop();
         }
 
         private void GoToSettingsPage()

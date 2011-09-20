@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using GalaSoft.MvvmLight.Threading;
 using WhereIsMakkah.ViewModel;
 using WhereIsMakkah.Model;
 
@@ -35,6 +36,9 @@ namespace WhereIsMakkah
             // Standard Silverlight initialization
             InitializeComponent();
 
+            //Readies the DispatcherHelper for usage throughout application
+            DispatcherHelper.Initialize();
+            
             // Phone-specific initialization
             InitializePhoneApplication();
 
