@@ -67,7 +67,6 @@
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
 			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
 		<!--TitlePanel contains the name of the application and page title-->
@@ -86,7 +85,6 @@
 			</es:BlockArrow.Projection>
 		</es:BlockArrow>
 		<TextBlock TextWrapping="Wrap" Text="{Binding Feedback, Mode=OneWay}" Margin="{StaticResource PhoneMargin}" d:LayoutOverrides="Width" Grid.Row="2" HorizontalAlignment="Center"/>
-		<TextBlock TextWrapping="Wrap" Text="{Binding DistanceLabel, Mode=OneWay}" Margin="{StaticResource PhoneMargin}" d:LayoutOverrides="Width" Grid.Row="3" HorizontalAlignment="Center"/>
 	</Grid>
 
 

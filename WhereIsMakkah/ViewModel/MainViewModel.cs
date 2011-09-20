@@ -52,7 +52,7 @@ namespace WhereIsMakkah.ViewModel
 
                 // Update bindings, no broadcast
                 RaisePropertyChanged(DirectionDeterminedPropertyName);
-                RaisePropertyChanged(DistanceLabelPropertyName);
+                RaisePropertyChanged(FeedbackPropertyName);
             }
         }
 
@@ -96,7 +96,7 @@ namespace WhereIsMakkah.ViewModel
         {
             get
             {
-                return _locationDetermined && _motionDetermined;
+                return _locationServiceSetting && _locationDetermined && _motionDetermined;
             }
         }
 
@@ -153,9 +153,18 @@ namespace WhereIsMakkah.ViewModel
         {
             get
             {
-                if (LocationServiceSetting)
+                if (_locationServiceSetting)
                 {
-                    return _feedback;
+                    if (_locationDetermined)
+                    {
+                        var unit = _metricSetting ? AppResources.MetricUnitLabel : AppResources.ImperialUnitLabel;
+
+                        return string.Format(AppResources.DistanceLabel, Distance.ToString("0"), unit);
+                    }
+                    else
+                    {
+                        return _feedback;
+                    }
                 }
                 else
                 {
@@ -188,11 +197,6 @@ namespace WhereIsMakkah.ViewModel
         /// </summary>
         public bool MetricSetting
         {
-            get
-            {
-                return _metricSetting;
-            }
-
             set
             {
                 if (_metricSetting == value)
@@ -204,7 +208,7 @@ namespace WhereIsMakkah.ViewModel
                 _metricSetting = value;
 
                 // Update bindings, no broadcast
-                RaisePropertyChanged(DistanceLabelPropertyName);
+                RaisePropertyChanged(FeedbackPropertyName);
             }
         }
 
@@ -225,7 +229,7 @@ namespace WhereIsMakkah.ViewModel
         {
             get
             {
-                if (MetricSetting)
+                if (_metricSetting)
                 {
                     return _distance;
                 }
@@ -246,29 +250,7 @@ namespace WhereIsMakkah.ViewModel
                 _distance = value;
 
                 // Update bindings, no broadcast
-                RaisePropertyChanged(DistanceLabelPropertyName);
-            }
-        }
-
-        /// <summary>
-        /// The <see cref="Unit" /> property's name.
-        /// </summary>
-        public const string DistanceLabelPropertyName = "DistanceLabel";
-
-        public string DistanceLabel
-        {
-            get
-            {
-                if (LocationServiceSetting && _locationDetermined)
-                {
-                    var unit = MetricSetting ? AppResources.MetricUnitLabel : AppResources.ImperialUnitLabel;
-
-                    return string.Format(AppResources.DistanceLabel, Distance.ToString("0"), unit);
-                }
-                else
-                {
-                    return "";
-                }
+                RaisePropertyChanged(FeedbackPropertyName);
             }
         }
 
@@ -287,11 +269,6 @@ namespace WhereIsMakkah.ViewModel
         /// </summary>
         public bool LocationServiceSetting
         {
-            get
-            {
-                return _locationServiceSetting;
-            }
-
             set
             {
                 if (_locationServiceSetting == value)
@@ -303,7 +280,7 @@ namespace WhereIsMakkah.ViewModel
                 _locationServiceSetting = value;
 
                 // Update bindings, no broadcast
-                RaisePropertyChanged(DistanceLabelPropertyName);
+                RaisePropertyChanged(DirectionDeterminedPropertyName);
                 RaisePropertyChanged(FeedbackPropertyName);
             }
         }
@@ -367,7 +344,7 @@ namespace WhereIsMakkah.ViewModel
 
         private void StartLocationSensor()
         {
-            if (!LocationServiceSetting)
+            if (!_locationServiceSetting)
             {
                 return;
             }
