@@ -196,7 +196,7 @@ namespace WhereIsMakkah.Lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Large arrow is pointing toward Makkah..
+        ///   Looks up a localized string similar to Arrow is pointing toward Makkah..
         /// </summary>
         public static string FeedbackReadyLabel {
             get {

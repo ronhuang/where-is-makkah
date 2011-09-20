@@ -163,7 +163,7 @@
     <value>Location data is not available.</value>
   </data>
   <data name="FeedbackReadyLabel" xml:space="preserve">
-    <value>Large arrow is pointing toward Makkah.</value>
+    <value>Arrow is pointing toward Makkah.</value>
   </data>
   <data name="FeedbackStartingLabel" xml:space="preserve">
     <value>Starting location service. This may take a while.</value>

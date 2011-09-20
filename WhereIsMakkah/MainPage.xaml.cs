@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Windows.Media;
 using System.Windows.Data;
-using System.Windows.Media.Animation;
 using System.Text;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -33,7 +31,7 @@ namespace WhereIsMakkah
                     SystemTray.SetProgressIndicator(this, progressIndicator);
 
                     // Bind progress indicator to Busy property
-                    var binding = new Binding("Busy") { Source = this.LayoutRoot.DataContext };
+                    var binding = new Binding("LocationDetermined") { Source = this.LayoutRoot.DataContext, Converter = new InverseBooleanConverter() };
                     BindingOperations.SetBinding(progressIndicator, ProgressIndicator.IsVisibleProperty, binding);
 
                     // Localize the text on application bar.
@@ -56,11 +54,10 @@ namespace WhereIsMakkah
 
                     SystemTray.SetProgressIndicator(this, null);
 
-                    // Unbind progress indicator to Busy property
+                    // Unbind progress indicator to LocationDetermined property
                     BindingOperations.SetBinding(progressIndicator, ProgressIndicator.IsVisibleProperty, null);
                 };
 
-            Messenger.Default.Register<AnimateArrowMessage>(this, (msg) => ReceiveMessage(msg));
             Messenger.Default.Register<GoToPageMessage>(this, (msg) => ReceiveMessage(msg));
         }
 
@@ -80,55 +77,6 @@ namespace WhereIsMakkah
             {
                 vm.SettingsCommand.Execute(null);
             }
-        }
-
-        private object ReceiveMessage(AnimateArrowMessage msg)
-        {
-            if (msg.Run)
-            {
-                if (msg.Indeterminate)
-                {
-                    if (IndeterminateArrow.GetCurrentState() != ClockState.Stopped)
-                    {
-                        return null;
-                    }
-
-                    var vm = DataContext as MainViewModel;
-                    var anim = IndeterminateArrow.Children[0] as DoubleAnimationUsingKeyFrames;
-                    anim.KeyFrames[0].Value = vm.CurrentRotationZ + 2.0;
-                    anim.KeyFrames[1].Value = vm.CurrentRotationZ - 2.0;
-                    anim.KeyFrames[2].Value = vm.CurrentRotationZ;
-
-                    IndeterminateArrow.Begin();
-                }
-                else
-                {
-                    if (DeterminateArrow.GetCurrentState() != ClockState.Stopped)
-                    {
-                        return null;
-                    }
-
-                    var vm = DataContext as MainViewModel;
-                    var anim = DeterminateArrow.Children[0] as DoubleAnimation;
-                    anim.From = vm.CurrentRotationZ;
-                    anim.To = msg.DestinationZ;
-                    vm.CurrentRotationZ = msg.DestinationZ;
-
-                    DeterminateArrow.Begin();
-                }
-            }
-            else
-            {
-                if (IndeterminateArrow.GetCurrentState() != ClockState.Stopped)
-                {
-                    IndeterminateArrow.Stop();
-                }
-                if (DeterminateArrow.GetCurrentState() != ClockState.Stopped)
-                {
-                    DeterminateArrow.Stop();
-                }
-            }
-            return null;
         }
 
         private object ReceiveMessage(GoToPageMessage msg)
