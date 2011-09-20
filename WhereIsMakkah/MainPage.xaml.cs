@@ -30,8 +30,8 @@ namespace WhereIsMakkah
 
                     SystemTray.SetProgressIndicator(this, progressIndicator);
 
-                    // Bind progress indicator to LocationDetermined property
-                    var binding = new Binding("LocationDetermined") { Source = this.LayoutRoot.DataContext, Converter = new InverseBooleanConverter() };
+                    // Bind progress indicator to Busy property
+                    var binding = new Binding("Busy") { Source = this.LayoutRoot.DataContext };
                     BindingOperations.SetBinding(progressIndicator, ProgressIndicator.IsVisibleProperty, binding);
 
                     // Localize the text on application bar.
@@ -52,7 +52,7 @@ namespace WhereIsMakkah
 
                     SystemTray.SetProgressIndicator(this, null);
 
-                    // Unbind progress indicator to LocationDetermined property
+                    // Unbind progress indicator to Busy property
                     BindingOperations.SetBinding(progressIndicator, ProgressIndicator.IsVisibleProperty, null);
                 };
 

@@ -90,7 +90,6 @@
     <Compile Include="Lang\LocalizedStrings.cs" />
     <Compile Include="Model\AppSettings.cs" />
     <Compile Include="Util\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Util\InverseBooleanConverter.cs" />
     <Compile Include="Util\SettingsChangedMessage.cs" />
     <Compile Include="Util\GoToPageMessage.cs" />
     <Compile Include="Util\GeoDistanceCalculator.cs" />

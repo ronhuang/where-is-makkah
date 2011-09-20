@@ -52,6 +52,7 @@ namespace WhereIsMakkah.ViewModel
 
                 // Update bindings, no broadcast
                 RaisePropertyChanged(DirectionDeterminedPropertyName);
+                RaisePropertyChanged(BusyPropertyName);
                 RaisePropertyChanged(FeedbackPropertyName);
             }
         }
@@ -80,6 +81,7 @@ namespace WhereIsMakkah.ViewModel
 
                 // Update bindings, no broadcast
                 RaisePropertyChanged(DirectionDeterminedPropertyName);
+                RaisePropertyChanged(BusyPropertyName);
             }
         }
 
@@ -97,6 +99,24 @@ namespace WhereIsMakkah.ViewModel
             get
             {
                 return _locationServiceSetting && _locationDetermined && _motionDetermined;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="Busy" /> property's name.
+        /// </summary>
+        public const string BusyPropertyName = "Busy";
+
+        /// <summary>
+        /// Gets the Busy property.
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// This property's value is broadcasted by the Messenger's default instance when it changes.
+        /// </summary>
+        public bool Busy
+        {
+            get
+            {
+                return _locationServiceSetting ? !(_locationDetermined && _motionDetermined) : false;
             }
         }
 
@@ -281,6 +301,7 @@ namespace WhereIsMakkah.ViewModel
 
                 // Update bindings, no broadcast
                 RaisePropertyChanged(DirectionDeterminedPropertyName);
+                RaisePropertyChanged(BusyPropertyName);
                 RaisePropertyChanged(FeedbackPropertyName);
             }
         }
@@ -391,7 +412,6 @@ namespace WhereIsMakkah.ViewModel
                 case GeoPositionStatus.Ready:
                     GeoCoordinate loc = _watcher.Position.Location;
 
-                    Feedback = "";
                     Distance = GeoDistanceCalculator.DistanceInKilometers(loc.Latitude, loc.Longitude, Makkah.Latitude, Makkah.Longitude);
 
                     var destZ = 360.0 - GeoDistanceCalculator.InitialBearing(loc.Latitude, loc.Longitude, Makkah.Latitude, Makkah.Longitude); // counter-clockwise
