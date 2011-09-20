@@ -79,7 +79,7 @@
 		</StackPanel>
 
 		<!--ContentPanel - place additional content here-->
-		<es:BlockArrow x:Name="DirectionArrow" Fill="{StaticResource PhoneAccentBrush}" Orientation="Up" UseLayoutRounding="False" Width="400" Grid.Row="1" Height="500" Visibility="{Binding DirectionDetermined, Converter={StaticResource BooleanToVisibilityConverter}}">
+		<es:BlockArrow x:Name="DirectionArrow" Fill="{StaticResource PhoneAccentBrush}" Orientation="Up" UseLayoutRounding="False" Width="450" Grid.Row="1" Height="550" Visibility="{Binding DirectionDetermined, Converter={StaticResource BooleanToVisibilityConverter}}">
 			<es:BlockArrow.Projection>
 				<Matrix3DProjection ProjectionMatrix="{Binding CurrentMatrix}"/>
 			</es:BlockArrow.Projection>

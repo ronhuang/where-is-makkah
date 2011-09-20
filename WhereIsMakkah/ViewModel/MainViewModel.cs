@@ -451,15 +451,15 @@ namespace WhereIsMakkah.ViewModel
 
         private void CurrentValueChanged(MotionReading e)
         {
-            const double arrowWidth = 400.0;
-            const double arrowHeight = 500.0;
-            const double layoutWidth = 400.0;
-            const double layoutHeight = 500.0;
+            const double arrowWidth = 450.0;
+            const double arrowHeight = 550.0;
+            const double layoutWidth = 450.0;
+            const double layoutHeight = 550.0;
 
             // Translate the image along the negative Z-axis such that it occupies 50% of the
             // vertical field of view.
             double fovY = Math.PI / 2.0;
-            double translationZ = -arrowHeight / Math.Tan(fovY / 2.0);
+            double translationZ = -arrowHeight * 0.75;
 
             // You can create a 3D effect by creating a number of simple 
             // tranformation Matrix3D matrixes and then multiply them together.
