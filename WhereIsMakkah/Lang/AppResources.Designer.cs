@@ -187,15 +187,6 @@ namespace WhereIsMakkah.Lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Arrow is pointing toward Makkah..
-        /// </summary>
-        public static string FeedbackReadyLabel {
-            get {
-                return ResourceManager.GetString("FeedbackReadyLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Starting location service. This may take a while..
         /// </summary>
         public static string FeedbackStartingLabel {
@@ -286,7 +277,7 @@ namespace WhereIsMakkah.Lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Note: with Windows Phone 7.5, you no longer have to manually point the top of the phone toward north first to show the direction to Makkah..
+        ///   Looks up a localized string similar to Note: Motion API may be interfered by the surroundings of the phone, such as magnets and metels. Please be warned that the direction might not be 100% correct..
         /// </summary>
         public static string NoteLabel {
             get {
@@ -300,6 +291,15 @@ namespace WhereIsMakkah.Lang {
         public static string SettingsTitle {
             get {
                 return ResourceManager.GetString("SettingsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source Code.
+        /// </summary>
+        public static string SourceCodeLabel {
+            get {
+                return ResourceManager.GetString("SourceCodeLabel", resourceCulture);
             }
         }
         

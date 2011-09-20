@@ -159,9 +159,6 @@
   <data name="FeedbackNotAvailableLabel" xml:space="preserve">
     <value>Location data is not available.</value>
   </data>
-  <data name="FeedbackReadyLabel" xml:space="preserve">
-    <value>Arrow is pointing toward Makkah.</value>
-  </data>
   <data name="FeedbackStartingLabel" xml:space="preserve">
     <value>Starting location service. This may take a while.</value>
   </data>
@@ -194,10 +191,13 @@
     <value>kilometer(s)</value>
   </data>
   <data name="NoteLabel" xml:space="preserve">
-    <value>Note: with Windows Phone 7.5, you no longer have to manually point the top of the phone toward north first to show the direction to Makkah.</value>
+    <value>Note: Motion API may be interfered by the surroundings of the phone, such as magnets and metels. Please be warned that the direction might not be 100% correct.</value>
   </data>
   <data name="SettingsTitle" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="SourceCodeLabel" xml:space="preserve">
+    <value>Source Code</value>
   </data>
   <data name="TitleLabel" xml:space="preserve">
     <value>Where Is Makkah</value>
