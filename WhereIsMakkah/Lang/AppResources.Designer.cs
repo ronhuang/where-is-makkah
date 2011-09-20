@@ -88,15 +88,6 @@ namespace WhereIsMakkah.Lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Refresh.
-        /// </summary>
-        public static string ApplicationBarRefreshLabel {
-            get {
-                return ResourceManager.GetString("ApplicationBarRefreshLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string ApplicationBarSettingsLabel {
@@ -250,15 +241,6 @@ namespace WhereIsMakkah.Lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Manually point the small arrow to north..
-        /// </summary>
-        public static string InstructionLabel {
-            get {
-                return ResourceManager.GetString("InstructionLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to License.
         /// </summary>
         public static string LicenseLabel {
@@ -304,7 +286,7 @@ namespace WhereIsMakkah.Lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Note: since Windows Phone 7 does not support Compass API yet (will be available in 7.1,) you have to manually point the top of the phone toward north first to show the direction to Makkah..
+        ///   Looks up a localized string similar to Note: with Windows Phone 7.5, you no longer have to manually point the top of the phone toward north first to show the direction to Makkah..
         /// </summary>
         public static string NoteLabel {
             get {

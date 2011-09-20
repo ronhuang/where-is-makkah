@@ -37,9 +37,7 @@ namespace WhereIsMakkah
                     // Localize the text on application bar.
                     if (ApplicationBar != null)
                     {
-                        var refresh = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
-                        refresh.Text = AppResources.ApplicationBarRefreshLabel;
-                        var settings = ApplicationBar.Buttons[1] as ApplicationBarIconButton;
+                        var settings = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
                         settings.Text = AppResources.ApplicationBarSettingsLabel;
                     }
                 };
@@ -59,15 +57,6 @@ namespace WhereIsMakkah
                 };
 
             Messenger.Default.Register<GoToPageMessage>(this, (msg) => ReceiveMessage(msg));
-        }
-
-        private void RefreshClicked(object sender, EventArgs e)
-        {
-            var vm = DataContext as MainViewModel;
-            if (vm != null)
-            {
-                vm.SensorStartCommand.Execute(null);
-            }
         }
 
         private void SettingsClicked(object sender, EventArgs e)

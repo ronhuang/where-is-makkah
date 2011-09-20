@@ -26,45 +26,11 @@ namespace WhereIsMakkah.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        /// <summary>
-        /// The <see cref="OffsetFromNorthMatrix" /> property's name.
-        /// </summary>
-        public const string OffsetFromNorthMatrixPropertyName = "OffsetFromNorthMatrix";
-
         private Matrix3D _offsetFromNorthMatrix = Matrix3D.Identity;
-
-        /// <summary>
-        /// Gets the OffsetFromNorthMatrix property.
-        /// Changes to that property's value raise the PropertyChanged event. 
-        /// This property's value is broadcasted by the Messenger's default instance when it changes.
-        /// </summary>
-        public Matrix3D OffsetFromNorthMatrix
-        {
-            get
-            {
-                return _offsetFromNorthMatrix;
-            }
-
-            set
-            {
-                if (_offsetFromNorthMatrix == value)
-                {
-                    return;
-                }
-
-                var oldValue = _offsetFromNorthMatrix;
-                _offsetFromNorthMatrix = value;
-
-                // Update bindings, no broadcast
-                RaisePropertyChanged(OffsetFromNorthMatrixPropertyName);
-            }
-        }
 
         /// <summary>
         /// The <see cref="LocationDetermined" /> property's name.
         /// </summary>
-        public const string LocationDeterminedPropertyName = "LocationDetermined";
-
         private bool _locationDetermined = false;
 
         /// <summary>
@@ -74,11 +40,6 @@ namespace WhereIsMakkah.ViewModel
         /// </summary>
         public bool LocationDetermined
         {
-            get
-            {
-                return _locationDetermined;
-            }
-
             set
             {
                 if (_locationDetermined == value)
@@ -90,16 +51,14 @@ namespace WhereIsMakkah.ViewModel
                 _locationDetermined = value;
 
                 // Update bindings, no broadcast
-                RaisePropertyChanged(LocationDeterminedPropertyName);
                 RaisePropertyChanged(DirectionDeterminedPropertyName);
+                RaisePropertyChanged(DistanceLabelPropertyName);
             }
         }
 
         /// <summary>
         /// The <see cref="MotionDetermined" /> property's name.
         /// </summary>
-        public const string MotionDeterminedPropertyName = "MotionDetermined";
-
         private bool _motionDetermined = false;
 
         /// <summary>
@@ -109,11 +68,6 @@ namespace WhereIsMakkah.ViewModel
         /// </summary>
         public bool MotionDetermined
         {
-            get
-            {
-                return _motionDetermined;
-            }
-
             set
             {
                 if (_motionDetermined == value)
@@ -125,7 +79,6 @@ namespace WhereIsMakkah.ViewModel
                 _motionDetermined = value;
 
                 // Update bindings, no broadcast
-                RaisePropertyChanged(MotionDeterminedPropertyName);
                 RaisePropertyChanged(DirectionDeterminedPropertyName);
             }
         }
@@ -306,7 +259,7 @@ namespace WhereIsMakkah.ViewModel
         {
             get
             {
-                if (LocationServiceSetting && Distance >= 0.0)
+                if (LocationServiceSetting && _locationDetermined)
                 {
                     var unit = MetricSetting ? AppResources.MetricUnitLabel : AppResources.ImperialUnitLabel;
 
@@ -461,11 +414,11 @@ namespace WhereIsMakkah.ViewModel
                 case GeoPositionStatus.Ready:
                     GeoCoordinate loc = _watcher.Position.Location;
 
-                    Feedback = AppResources.FeedbackReadyLabel;
+                    Feedback = "";
                     Distance = GeoDistanceCalculator.DistanceInKilometers(loc.Latitude, loc.Longitude, Makkah.Latitude, Makkah.Longitude);
 
                     var destZ = 360.0 - GeoDistanceCalculator.InitialBearing(loc.Latitude, loc.Longitude, Makkah.Latitude, Makkah.Longitude); // counter-clockwise
-                    OffsetFromNorthMatrix = RotateZTransform(destZ);
+                    _offsetFromNorthMatrix = RotateZTransform(destZ);
                     LocationDetermined = true;
 
                     StopLocationSensor();
@@ -506,7 +459,7 @@ namespace WhereIsMakkah.ViewModel
             {
                 _motion.Start();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Feedback = AppResources.FeedbackMotionUnableToStartLabel;
             }
@@ -545,7 +498,7 @@ namespace WhereIsMakkah.ViewModel
             Matrix3D viewport = ViewportTransform(layoutWidth, layoutHeight);
 
             Matrix3D m = centerImageAtOrigin * invertYAxis;
-            m = m * OffsetFromNorthMatrix;
+            m = m * _offsetFromNorthMatrix;
             m = m * XnaMatrixToMatrix3D(e.Attitude.RotationMatrix);
             m = m * translateAwayFromCamera;
             m = m * perspective;
@@ -648,7 +601,6 @@ namespace WhereIsMakkah.ViewModel
 
         private void ReceiveMessage(SettingsChangedMessage msg)
         {
-            // FIXME: for the time being, only raise unit propery
             var key = msg.Key;
             if (key.Equals("Unit"))
             {

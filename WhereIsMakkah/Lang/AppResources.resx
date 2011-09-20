@@ -126,9 +126,6 @@
   <data name="AppCopyrightText" xml:space="preserve">
     <value>Copyright © 2011 Ron Huang. All rights reserved.  Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.</value>
   </data>
-  <data name="ApplicationBarRefreshLabel" xml:space="preserve">
-    <value>Refresh</value>
-  </data>
   <data name="ApplicationBarSettingsLabel" xml:space="preserve">
     <value>Settings</value>
   </data>
@@ -180,9 +177,6 @@
   <data name="ImperialUnitLabel" xml:space="preserve">
     <value>mile(s)</value>
   </data>
-  <data name="InstructionLabel" xml:space="preserve">
-    <value>Manually point the small arrow to north.</value>
-  </data>
   <data name="LicenseLabel" xml:space="preserve">
     <value>License</value>
     <comment>License label on the pivot item in settings page.</comment>
@@ -200,7 +194,7 @@
     <value>kilometer(s)</value>
   </data>
   <data name="NoteLabel" xml:space="preserve">
-    <value>Note: since Windows Phone 7 does not support Compass API yet (will be available in 7.1,) you have to manually point the top of the phone toward north first to show the direction to Makkah.</value>
+    <value>Note: with Windows Phone 7.5, you no longer have to manually point the top of the phone toward north first to show the direction to Makkah.</value>
   </data>
   <data name="SettingsTitle" xml:space="preserve">
     <value>Settings</value>
