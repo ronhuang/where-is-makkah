@@ -277,7 +277,7 @@ namespace WhereIsMakkah.Lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Note: Motion API may be interfered by the surroundings of the phone, such as magnets and metels. Please be warned that the direction might not be 100% correct..
+        ///   Looks up a localized string similar to Note: Motion API may be interfered by the surroundings of the phone, such as magnets and metals. Please be warned that the direction might not be 100% correct..
         /// </summary>
         public static string NoteLabel {
             get {

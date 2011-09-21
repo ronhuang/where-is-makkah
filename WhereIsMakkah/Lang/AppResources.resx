@@ -191,7 +191,7 @@
     <value>kilometer(s)</value>
   </data>
   <data name="NoteLabel" xml:space="preserve">
-    <value>Note: Motion API may be interfered by the surroundings of the phone, such as magnets and metels. Please be warned that the direction might not be 100% correct.</value>
+    <value>Note: Motion API may be interfered by the surroundings of the phone, such as magnets and metals. Please be warned that the direction might not be 100% correct.</value>
   </data>
   <data name="SettingsTitle" xml:space="preserve">
     <value>Settings</value>
